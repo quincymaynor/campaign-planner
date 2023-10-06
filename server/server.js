@@ -4,6 +4,8 @@ const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 
+require('dotenv').config(); //Add dotenv requirement
+
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
@@ -12,6 +14,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true, // Enable introspection
 });
 
 // new instance of an Apollo server with the GraphQL schema

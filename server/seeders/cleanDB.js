@@ -1,11 +1,10 @@
-const models = require('../models');
-const db = require('../config/connection');
+const db = require('../config/connection'); // Import the new db module
 
 module.exports = async (modelName, collectionName) => {
   try {
-    let modelExists = await models[modelName].db.db.listCollections({
+    let modelExists = await db.db.listCollections({
       name: collectionName
-    }).toArray()
+    }).toArray();
 
     if (modelExists.length) {
       await db.dropCollection(collectionName);
@@ -13,4 +12,9 @@ module.exports = async (modelName, collectionName) => {
   } catch (err) {
     throw err;
   }
-}
+};
+
+
+
+
+
