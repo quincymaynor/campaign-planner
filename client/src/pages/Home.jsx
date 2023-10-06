@@ -1,31 +1,23 @@
-import { useQuery } from '@apollo/client';
-
-import ThoughtList from '../components/ThoughtList';
-import ThoughtForm from '../components/ThoughtForm';
-
-import { QUERY_THOUGHTS } from '../utils/queries';
+import React from 'react';
+import AuthService from '../utils/auth'; // Import your AuthService
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_THOUGHTS);
-  const thoughts = data?.thoughts || [];
+  const isLoggedIn = AuthService.loggedIn(); // Check if the user is logged in
 
   return (
     <main>
       <div className="flex-row justify-center">
-        <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: '1px dotted #1a1a1a' }}
-        >
-          <ThoughtForm />
-        </div>
-        <div className="col-12 col-md-8 mb-3">
-          {loading ? (
-            <div>Loading...</div>
+        <div className="col-12 col-md-10 mb-3 p-3">
+          {isLoggedIn ? (
+            <h2>Welcome home, {AuthService.getProfile().authenticatedPerson.username}!</h2>
           ) : (
-            <ThoughtList
-              thoughts={thoughts}
-              title="Some Feed for Thought(s)..."
-            />
+            <h2>Please log in or sign up to access this page.</h2>
+          )}
+          {isLoggedIn && (
+            // Render additional content for logged-in users
+            <div>
+              {/* You can add more content here */}
+            </div>
           )}
         </div>
       </div>
