@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Campaign } = require('../models');
 const { signToken } = require('../utils/auth');
 
 // Import AuthenticationError from the correct location
@@ -8,7 +8,7 @@ const { AuthenticationError } = require('apollo-server-express'); // Use the cor
 const resolvers = {
   Query: {
     // Example resolver for fetching user data
-    getUser: async (_, __, context) => {
+    getUser: async (_parent, _args, context) => {
       // Check if the user is authenticated
       if (!context.user) {
         throw new AuthenticationError('Not authenticated.');
@@ -18,11 +18,24 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       return user;
     },
+    campaigns: async (_parent, { username }) => {
+      const params = username ? { username } : {};
+      return Campaign.find(params).sort({ createdAt: -1 });
+    },
+    campaign: async (_parent, { campaignId }) => {
+      return Campaign.findOne({ _id: campaignId });
+    },
+    me: async (_parent, _args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('campaigns');
+      }
+      throw AuthenticationError;
+    },
   },
 
   Mutation: {
     // Mutation resolver for user login
-    login: async (_, { email, password }) => {
+    login: async (_parent, { email, password }) => {
       console.log(email, password)
       try {
         // Find the user by email
@@ -45,7 +58,7 @@ const resolvers = {
     },
 
     // Mutation resolver for user registration
-    addUser: async (_, args) => {
+    addUser: async (_parent, args) => {
       try {
         // Create a new user using data from args
         const user = await User.create(args);
@@ -60,6 +73,75 @@ const resolvers = {
         console.error(error);
         throw new AuthenticationError('Registration failed.');
       }
+    },
+    
+    addCampaign: async (_parent, _args, context) => {
+      if (context.user) {
+        const campaign = await Campaign.create({
+          campaignAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { campaigns: campaign._id } }
+        );
+
+        return campaign;
+      }
+      throw AuthenticationError;
+    },
+
+    addNote: async (_parent, { campaignId, noteText }, context) => {
+      if (context.user) {
+        return Campaign.findOneAndUpdate(
+          { _id: campaignId },
+          {
+            $addToSet: {
+              notes: { noteText, noteAuthor: context.user.username },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw AuthenticationError;
+    },
+
+    removeCampaign: async (_parent, { campaignId }, context) => {
+      if (context.user) {
+        const campaign = await Campaign.findOneAndDelete({
+          _id: campaignId,
+          campaignAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { campaigns: campaign._id } }
+        );
+
+        return campaign;
+      }
+      throw AuthenticationError;
+    },
+
+    removeNote: async (_parent, { campaignId, noteId }, context) => {
+      if (context.user) {
+        return Campaign.findOneAndUpdate(
+          { _id: campaignId },
+          {
+            $pull: {
+              notes: {
+                _id: noteId,
+                noteAuthor: context.user.username,
+              },
+            },
+          },
+          { new: true }
+        );
+      }
+      throw AuthenticationError;
     },
   },
 };

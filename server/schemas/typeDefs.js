@@ -4,6 +4,21 @@ const typeDefs = `#graphql
     username: String!
     email: String!
     password: String!
+    campaigns: [Campaign]
+  }
+  
+  type Campaign {
+    _id: ID!
+    campaignAuthor: String!
+    createdAt: String!
+    notes: [Note]!
+  }
+
+  type Note {
+    _id: ID
+    noteText: String!
+    noteAuthor: String!
+    createdAt: String!
   }
 
   type Auth {
