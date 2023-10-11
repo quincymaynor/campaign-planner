@@ -2,33 +2,116 @@
 
 /* Remove default margin and padding */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Remove list styles (bullets, numbers, etc.) */
-  ul, ol {
-    list-style: none;
-  }
-  
-  /* Remove text decoration (underlines, etc.) for links */
-  a {
-    text-decoration: none;
-  }
-  
-  /* Set a base font size and family */
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-  }
-  
-  /* Optionally, set a background color and text color */
-  /* body {
-    background-color: #f0f0f0;
-    color: #333;
-  } */
-  
-  /* Add additional reset styles as needed */
-  
-  /* End of Reset CSS */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remove list styles (bullets, numbers, etc.) */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove text decoration (underlines, etc.) for links */
+a {
+  text-decoration: none;
+}
+
+/* Set a base font size and family */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+/* Optionally, set a background color and text color */
+/* body {
+  background-color: #f0f0f0;
+  color: #333;
+} */
+
+/* Add additional reset styles as needed */
+
+/* End of Reset CSS */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the header element */
+/* header {
+  background-color: #444; 
+  height: 100px; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 0 20px; 
+} */
+
+/* New styles for the logo and buttons */
+.logo-container {
+  flex: 1; /* Let the logo container grow to take available space */
+  height: 70px; /* Set the height of the logo container */
+}
+
+.logo {
+  max-height: 100%; /* Set the maximum height to fit within the logo container */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.logo-container img {
+  height: 100%; /* Set the height to 100% */
+  width: auto; /* Maintain aspect ratio */
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center; /* Vertically center the buttons */
+}
+
+nav ul li {
+  margin-left: 20px; /* Adjust the spacing between items as needed */
+}
+
+/* Adjust background color */
+header {
+  background-color: #333; /* Darker grey background color */
+  height: 70px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px; /* Adjust the gap (margin) between buttons as needed */
+}
+
+.header-button {
+  background: none;
+  color: white !important;
+  font-weight: bold;
+  font-size: 16px;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: background 0.3s, border 0.3s;
+}
+
+.header-button:hover {
+  background: black;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 25px; /* Rounded border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
+}
+
+
+
+
