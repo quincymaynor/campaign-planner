@@ -19,6 +19,7 @@ const resolvers = {
   Mutation: {
     // Mutation resolver for user login
     login: async (_, { email, password }) => {
+      console.log(email, password)
       try {
         // Find the user by email
         const user = await User.findOne({ email });
