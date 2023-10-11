@@ -1,7 +1,8 @@
 const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
+const { AuthenticationError } = require('apollo-server-express');
 
-const secret = process.env.JWT_SECRET || 'default_secret'; //Change secret to be... well.. a secret, or use default if not available
+const secret = process.env.JWT_SECRET || 'default_secret';
 const expiration = '2h';
 
 module.exports = {
@@ -19,21 +20,31 @@ module.exports = {
     }
 
     if (!token) {
-      return req
+      return req;
     }
 
     try {
-      const { authenticatedPerson } = jwt.verify(token, secret, { maxAge: expiration });
+      const { authenticatedPerson, password } = jwt.verify(token, secret, { maxAge: expiration });
+
+      if (password.length < 8) {
+        throw new AuthenticationError('Password must be at least 8 characters long');
+      }
+
       req.user = authenticatedPerson;
     } catch (error) {
       console.error('Invalid token:', error.message);
+      throw new AuthenticationError('Invalid token'); // Use AuthenticationError
     }
 
     return req;
   },
-  
-  signToken: function ({ email, username, _id }) {
-    const payload = { email, username, _id };
+
+  signToken: function ({ email, username, _id, password }) {
+    if (password.length < 8) {
+      throw new AuthenticationError('Password must be at least 8 characters long');
+    }
+
+    const payload = { email, username, _id, password };
     return jwt.sign({ authenticatedPerson: payload }, secret, { expiresIn: expiration });
   },
 };

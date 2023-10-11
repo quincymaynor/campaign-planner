@@ -1,9 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
-
 import Auth from '../utils/auth';
 
 const Signup = () => {
@@ -13,6 +11,7 @@ const Signup = () => {
     password: '',
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [passwordError, setPasswordError] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,16 +24,21 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+
+    if (formState.password.length < 8) {
+      setPasswordError('Password should be 8 characters or more');
+      return;
+    }
 
     try {
-      const { data } = await addUser({
+      const response = await addUser({
         variables: { ...formState },
       });
 
-      Auth.login(data.addUser.token);
+      Auth.login(response.data.addUser.token);
     } catch (e) {
-      console.error(e);
+      console.error('Other error:', e.message);
+      // Handle other errors, e.g., display a different message
     }
   };
 
@@ -56,7 +60,7 @@ const Signup = () => {
                   placeholder="Your username"
                   name="username"
                   type="text"
-                  value={formState.name}
+                  value={formState.username} 
                   onChange={handleChange}
                 />
                 <input
@@ -88,6 +92,12 @@ const Signup = () => {
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
                 {error.message}
+              </div>
+            )}
+
+            {passwordError && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {passwordError}
               </div>
             )}
           </div>

@@ -1,5 +1,9 @@
 const { User } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
+
+// Import AuthenticationError from the correct location
+const { AuthenticationError } = require('apollo-server-express'); // Use the correct import
+
 
 const resolvers = {
   Query: {
