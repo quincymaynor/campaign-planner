@@ -19,7 +19,7 @@ module.exports = {
     }
 
     if (!token) {
-      throw this.AuthenticationError; // Throw AuthenticationError if no token is found
+      return req
     }
 
     try {
@@ -27,7 +27,6 @@ module.exports = {
       req.user = authenticatedPerson;
     } catch (error) {
       console.error('Invalid token:', error.message);
-      throw this.AuthenticationError; // Throw AuthenticationError if token verification fails
     }
 
     return req;
