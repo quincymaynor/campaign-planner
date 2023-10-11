@@ -22,7 +22,7 @@ const typeDefs = `#graphql
     # log in
     login(email: String!, password: String!): Auth
     # create a new user
-    addUser(username: String!, email: String!, password: String!): User
+    addUser(username: String!, email: String!, password: String!): Auth
     # update a user's details
     updateUser(userId: ID!, username: String, email: String): User
     # delete a user
