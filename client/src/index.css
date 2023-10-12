@@ -38,15 +38,9 @@ body {
   padding: 0;
 }
 
-/* Style the header element */
-/* header {
-  background-color: #444; 
-  height: 100px; 
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 0 20px; 
-} */
+/**/
+/* HEADER */
+/**/
 
 /* New styles for the logo and buttons */
 .logo-container {
@@ -112,6 +106,76 @@ header {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
 }
 
+/**/
+/* STYLE FORMS */
+/**/
 
+form {
+  display: flex; /* Use flex display */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements horizontally */
+}
 
+/* Style the form container */
+.card {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+}
 
+/* Style the form header */
+.card-header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Style form inputs and button */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #333; /* Match the Header buttons border color */
+  border-radius: 25px; /* Match the border radius of Header buttons */
+  font-size: 16px;
+}
+
+.form-input:focus {
+  outline: none;
+  border: 2px solid #555; /* Adjust the border color on focus */
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Style the submit button */
+.btn-primary {
+  background-color: #333; /* Dark gray background */
+  color: white;
+  border: 1px solid white; /* White border */
+  border-radius: 25px; /* Match the border radius of Header buttons */
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s; /* Add box-shadow transition */
+}
+
+/* Hover effect for the button */
+.btn-primary:hover {
+  background: black; /* Dark background on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a drop shadow on hover */
+}
+
+/* Style error message */
+.bg-danger {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
