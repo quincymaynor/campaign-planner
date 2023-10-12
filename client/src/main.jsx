@@ -31,8 +31,12 @@ const router = createBrowserRouter([
         element: <Signup />
       },
       {
-        path: '/me',
+        path: '/profile',
         element: <Profile />
+      },
+      {
+        path: '*', // Catch-all route for undefined routes
+        element: <Error />, // Render an error component or a not found page
       }
     ]
   }

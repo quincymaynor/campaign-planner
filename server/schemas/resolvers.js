@@ -18,6 +18,11 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       return user;
     },
+    getUsers: async () => {
+      // Implement logic to fetch and return a list of users from your database
+      const users = await User.find();
+      return users;
+    },
   },
 
   Mutation: {
