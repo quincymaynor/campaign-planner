@@ -27,10 +27,16 @@ const typeDefs = `#graphql
   }
 
   type Query {
-    # Query to get a user by ID
+    # query to get a user by ID
     getUser(userId: ID!): User
-    # Query to get a list of users
+    # query to get a list of users
     getUsers: [User]
+    # query to get a user's created campaigns
+    getCampaigns(campaignAuthor: String!): [Campaign]
+    # query to get a user's single campaign
+    getCampaign(campaignAuthor: String!, campaignId: ID!): Campaign
+    # query to get all campaigns accessible to a user
+    getMe(userId: ID!): [Campaign]
   }
 
   type Mutation {
@@ -41,7 +47,15 @@ const typeDefs = `#graphql
     # update a user's details
     updateUser(userId: ID!, username: String, email: String): User
     # delete a user
-    deleteUser(userId: ID!): User
+    removeUser(userId: ID!): User
+    # add a campaign
+    addCampaign(campaignAuthor: String!, createdAt: String!): Campaign
+    # add a note
+    addNote(noteText: String!, noteAuthor: String!): Note
+    # delete a campaign
+    removeCampaign(campaignId: ID!): Campaign
+    # delete a note
+    removeNote(noteId: ID!): Note
   }
 `;
 

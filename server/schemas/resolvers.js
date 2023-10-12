@@ -18,14 +18,14 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       return user;
     },
-    campaigns: async (_parent, { username }) => {
+    getCampaigns: async (_parent, { username }) => {
       const params = username ? { username } : {};
       return Campaign.find(params).sort({ createdAt: -1 });
     },
-    campaign: async (_parent, { campaignId }) => {
+    getCampaign: async (_parent, { campaignId }) => {
       return Campaign.findOne({ _id: campaignId });
     },
-    me: async (_parent, _args, context) => {
+    getMe: async (_parent, _args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('campaigns');
       }
@@ -75,6 +75,7 @@ const resolvers = {
       }
     },
     
+    // Mutation resolver for creating a campaign
     addCampaign: async (_parent, _args, context) => {
       if (context.user) {
         const campaign = await Campaign.create({
@@ -91,6 +92,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    // Mutation resolver for creating a note
     addNote: async (_parent, { campaignId, noteText }, context) => {
       if (context.user) {
         return Campaign.findOneAndUpdate(
@@ -109,6 +111,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    // Mutation resolver for deleting a campaign
     removeCampaign: async (_parent, { campaignId }, context) => {
       if (context.user) {
         const campaign = await Campaign.findOneAndDelete({
@@ -126,6 +129,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    // Mutation resolver for deleting a note
     removeNote: async (_parent, { campaignId, noteId }, context) => {
       if (context.user) {
         return Campaign.findOneAndUpdate(
