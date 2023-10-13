@@ -11,7 +11,7 @@ const typeDefs = `#graphql
     _id: ID!
     campaignAuthor: String!
     createdAt: String!
-    notes: [Note]!
+    notes: [Note]
   }
 
   type Note {
@@ -34,7 +34,7 @@ const typeDefs = `#graphql
     # query to get a user's created campaigns
     getCampaigns(campaignAuthor: String!): [Campaign]
     # query to get a user's single campaign
-    getCampaign(campaignAuthor: String!, campaignId: ID!): Campaign
+    getCampaign(campaignId: ID!): Campaign
     # query to get all campaigns accessible to a user
     getMe(userId: ID!): [Campaign]
   }

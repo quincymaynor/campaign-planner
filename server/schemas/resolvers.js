@@ -18,13 +18,21 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       return user;
     },
+
+    getUsers: async () => {
+      const users = await User.find();
+      return users;
+    },
+
     getCampaigns: async (_parent, { username }) => {
       const params = username ? { username } : {};
       return Campaign.find(params).sort({ createdAt: -1 });
     },
+
     getCampaign: async (_parent, { campaignId }) => {
       return Campaign.findOne({ _id: campaignId });
     },
+    
     getMe: async (_parent, _args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('campaigns');
