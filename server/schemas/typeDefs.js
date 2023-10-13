@@ -14,6 +14,8 @@ const typeDefs = `#graphql
   type Query {
     # Query to get a user by ID
     getUser(userId: ID!): User
+      # Query to get a user by username
+    user(username: String!): User
     # Query to get a list of users
     getUsers: [User]
   }

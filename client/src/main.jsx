@@ -35,6 +35,10 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
+        path: '/profile/:username', // Define the route with a username parameter
+        element: <Profile />
+      },
+      {
         path: '*', // Catch-all route for undefined routes
         element: <Error />, // Render an error component or a not found page
       }
