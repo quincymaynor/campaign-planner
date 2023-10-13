@@ -33,7 +33,7 @@ const resolvers = {
     },
     // Fetch a list of logged-in user's campaigns
     getCampaigns: async (_parent, { username }) => {
-      const params = username ? { username } : {};
+      const params = await username ? { username } : {};
       if (!context.user) {
         throw new AuthenticationError('Not authenticated.');
       }
@@ -43,7 +43,7 @@ const resolvers = {
     getCampaign: async (_parent, { campaignId }) => {
       return Campaign.findOne({ _id: campaignId });
     },
-    // Fetch logged-in user's profile
+    // Fetch logged-in user's gm and player campaigns
     getMe: async (_parent, _args, context) => {
       if (context.user) {
         const foundUser = await User.findOne({ _id: context.user._id }).populate(['gmCampaigns', 'playerCampaigns']);
@@ -136,8 +136,25 @@ const resolvers = {
     },
 
     // Mutation resolver for updating a campaign
+    updateCampaign: async (_parent, {  }) => {
+      const campaign = await Campaign.findOneAndUpdate(
+        { _id: id }, 
+        {  }, 
+        { new: true }
+      );
+
+      return campaign;
+    },
 
     // Mutation resolver for updating a note
+    updateNote: async (_parent, {  }) => {
+      const note = await Campaign.findOneAndUpdate(
+        { _id: id }, 
+        {  }, 
+        { new: true });
+
+      return note;
+    },
 
     // Mutation resolver for deleting a campaign
     removeCampaign: async (_parent, { campaignId }, context) => {
