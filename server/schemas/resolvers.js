@@ -7,7 +7,7 @@ const { AuthenticationError } = require('apollo-server-express'); // Use the cor
 
 const resolvers = {
   Query: {
-    // Example resolver for fetching user data
+    // Fetch logged-in user data
     getUser: async (_parent, _args, context) => {
       // Check if the user is authenticated
       if (!context.user) {
@@ -18,7 +18,7 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       return user;
     },
-    //this is to fetch a user by their USERNAME
+    // Fetch a user by their USERNAME
     user: async (_parent, { username }) => {
       const user = await User.findOne({ username });
       if (!user) {
@@ -26,12 +26,12 @@ const resolvers = {
       }
       return user;
     },
-    //all users for apollo or lists
+    // Fetch a list of users
     getUsers: async () => {
       const users = await User.find();
       return users;
     },
-
+    // Fetch a list of logged-in user's campaigns
     getCampaigns: async (_parent, { username }) => {
       const params = username ? { username } : {};
       if (!context.user) {
@@ -39,14 +39,14 @@ const resolvers = {
       }
       return Campaign.find(params).sort({ createdAt: -1 });
     },
-
+    // Fetch a single campaigns
     getCampaign: async (_parent, { campaignId }) => {
       return Campaign.findOne({ _id: campaignId });
     },
-    
+    // Fetch logged-in user's profile
     getMe: async (_parent, _args, context) => {
       if (context.user) {
-        const foundUser = await User.findOne({ _id: context.user._id }).populate('gmCampaigns');
+        const foundUser = await User.findOne({ _id: context.user._id }).populate(['gmCampaigns', 'playerCampaigns']);
         console.log(foundUser);
         return foundUser;
       }
@@ -134,6 +134,10 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+
+    // Mutation resolver for updating a campaign
+
+    // Mutation resolver for updating a note
 
     // Mutation resolver for deleting a campaign
     removeCampaign: async (_parent, { campaignId }, context) => {
