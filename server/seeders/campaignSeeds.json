@@ -1,0 +1,16 @@
+[
+    {
+        "campaignAuthor": "User One",
+        "createdAt": "1/1/11",
+        "notes": [{
+            "noteText": "first note",
+            "noteAuthor": "User 2",
+            "createdAt": "1/1/11"
+        }]
+    },
+    {
+        "campaignAuthor": "User One",
+        "createdAt": "1/1/11",
+        "notes": []
+    }
+  ]
