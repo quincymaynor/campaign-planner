@@ -29,7 +29,9 @@ const typeDefs = `#graphql
   type Query {
     # query to get a user by ID
     getUser(userId: ID!): User
-    # query to get a list of users
+      # Query to get a user by username
+    user(username: String!): User
+    # Query to get a list of users
     getUsers: [User]
     # query to get a user's created campaigns
     getCampaigns(campaignAuthor: String!): [Campaign]

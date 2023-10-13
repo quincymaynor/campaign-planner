@@ -18,7 +18,15 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       return user;
     },
-
+    //this is to fetch a user by their USERNAME
+    user: async (_, { username }) => {
+      const user = await User.findOne({ username });
+      if (!user) {
+        throw new AuthenticationError('User not found.');
+      }
+      return user;
+    },
+    //all users for apollo or lists
     getUsers: async () => {
       const users = await User.find();
       return users;
