@@ -2,6 +2,7 @@
   {
     "username": "User One",
     "email": "user1@gmail.com",
-    "password": "1stpassword"
+    "password": "1stpassword",
+    "gmCampaigns": []
   }
 ]

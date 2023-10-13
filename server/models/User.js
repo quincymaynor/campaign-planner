@@ -24,6 +24,14 @@ const userSchema = new Schema({
     //   message: 'Password must be at least 8 characters long',
     // },
   },
+  gmCampaigns: [{
+    type: Schema.Types.ObjectId,
+    ref: "Campaign"
+  }],
+  playerCampaigns: [{
+    type: Schema.Types.ObjectId,
+    ref: "Campaign"
+  }],
 });
 
 userSchema.pre('save', async function (next) {

@@ -3,6 +3,7 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const { User, Campaign } = require('./models')
 
 require('dotenv').config(); //add dotenv requirement
 
@@ -41,6 +42,10 @@ const startApolloServer = async () => {
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
+
+  // const foundUser = await User.findOne({ _id: "6528b2aa1348543e1e0a41a1" });
+  // console.log(foundUser);
+  // return foundUser;
 };
 
 // async function to start the server

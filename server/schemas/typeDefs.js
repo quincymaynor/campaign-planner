@@ -4,14 +4,16 @@ const typeDefs = `#graphql
     username: String!
     email: String!
     password: String!
-    campaigns: [Campaign]
+    gmCampaigns: [Campaign]
+    playerCampaigns: [Campaign]
   }
-  
+
   type Campaign {
     _id: ID!
-    campaignAuthor: String!
-    createdAt: String!
-    notes: [Note]
+    campaignAuthor: String
+    createdAt: String
+    publicNotes: [Note]
+    privateNotes: [Note]
   }
 
   type Note {
@@ -38,7 +40,7 @@ const typeDefs = `#graphql
     # query to get a user's single campaign
     getCampaign(campaignId: ID!): Campaign
     # query to get all campaigns accessible to a user
-    getMe(userId: ID!): [Campaign]
+    getMe: User
   }
 
   type Mutation {

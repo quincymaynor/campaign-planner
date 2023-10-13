@@ -19,7 +19,7 @@ const resolvers = {
       return user;
     },
     //this is to fetch a user by their USERNAME
-    user: async (_, { username }) => {
+    user: async (_parent, { username }) => {
       const user = await User.findOne({ username });
       if (!user) {
         throw new AuthenticationError('User not found.');
@@ -34,6 +34,9 @@ const resolvers = {
 
     getCampaigns: async (_parent, { username }) => {
       const params = username ? { username } : {};
+      if (!context.user) {
+        throw new AuthenticationError('Not authenticated.');
+      }
       return Campaign.find(params).sort({ createdAt: -1 });
     },
 
@@ -43,7 +46,9 @@ const resolvers = {
     
     getMe: async (_parent, _args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('campaigns');
+        const foundUser = await User.findOne({ _id: context.user._id }).populate('gmCampaigns');
+        console.log(foundUser);
+        return foundUser;
       }
       throw AuthenticationError;
     },
@@ -98,9 +103,12 @@ const resolvers = {
           campaignAuthor: context.user.username,
         });
 
-        await User.findOneAndUpdate(
+        console.log(campaign);
+
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { campaigns: campaign._id } }
+          { $addToSet: { gmCampaigns: campaign } },
+          {new: true}
         );
 
         return campaign;
