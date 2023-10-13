@@ -168,7 +168,7 @@ form {
 /* Hover effect for the button */
 .btn-primary:hover {
   background: black; /* Dark background on hover */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a drop shadow on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
 }
 
 /* Style error message */
@@ -177,5 +177,55 @@ form {
   color: white;
   padding: 10px;
   border-radius: 5px;
+  text-align: center;
+}
+
+/**/
+/* STYLE CARDS FOR CAMPAIGN */
+/**/
+
+.campaign-card {
+  width: 225px; /* Adjust the width as needed */
+  height: 300px; /* Adjust the height as needed */
+  background-image: url('your-image-url.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid white; /* White border */
+  border-radius: 25px; /* Match the border radius of Header buttons */
+  display: inline-block; /* Display cards next to each other */
+  margin: 10px; /* Add some margin to separate cards */
+  color: white;
+  transition: box-shadow 0.3s, transform 0.3s;
+  position: relative;
+}
+
+.campaign-card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
+  transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
+.campaign-title {
+  background: rgba(255, 255, 255, 0.5); /* 50% white opacity background */
+  color: black;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  transition: transform 0.3s; 
+}
+
+.campaign-card:hover .campaign-title {
+  transform: scale(1.2); /* Increase the size of the title on hover */
+}
+
+/**/
+/*QUICK STYLE THE FOOTER*/
+/**/
+footer {
+  background-color: #333; /* Darker grey background color */
+  height: 50px;
+  color: white;
   text-align: center;
 }
