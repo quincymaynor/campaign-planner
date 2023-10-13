@@ -1,24 +1,23 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
+import { Navigate } from 'react-router-dom'; // Import the Navigate component
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-
-import Auth from '../utils/auth';
+import AuthService from '../utils/auth';
 
 const Profile = () => {
   const { username: userParam } = useParams();
+
+  // Check if the user is authenticated
+  if (!AuthService.loggedIn()) {
+    // Redirect to the login page or show a message
+    return <Navigate to="/login" />;
+  }
 
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
 
   const user = data?.me || data?.user || {};
-  if (
-    Auth.loggedIn() && 
-    Auth.getProfile().authenticatedPerson.username === userParam
-  ) {
-    return <Navigate to="/me" />;
-  }
 
   if (loading) {
     return <div>Loading...</div>;

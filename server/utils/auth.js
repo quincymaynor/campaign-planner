@@ -24,11 +24,11 @@ module.exports = {
     }
 
     try {
-      const { authenticatedPerson, password } = jwt.verify(token, secret, { maxAge: expiration });
+      const { authenticatedPerson } = jwt.verify(token, secret, { maxAge: expiration });
 
-      if (password.length < 8) {
-        throw new AuthenticationError('Password must be at least 8 characters long');
-      }
+      // if (password.length < 8) {
+      //   throw new AuthenticationError('Password must be at least 8 characters long');
+      // }
 
       req.user = authenticatedPerson;
     } catch (error) {
@@ -40,9 +40,9 @@ module.exports = {
   },
 
   signToken: function ({ email, username, _id, password }) {
-    if (password.length < 8) {
-      throw new AuthenticationError('Password must be at least 8 characters long');
-    }
+    // if (password.length < 8) {
+    //   throw new AuthenticationError('Password must be at least 8 characters long');
+    // }
 
     const payload = { email, username, _id, password };
     return jwt.sign({ authenticatedPerson: payload }, secret, { expiresIn: expiration });
