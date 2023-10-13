@@ -1,10 +1,13 @@
 import React from 'react';
 
-const Campaign = ({ title, description }) => {
+const Campaign = ({ imageUrl, title }) => {
+  const cardStyle = {
+    backgroundImage: `url('${imageUrl}')`,
+  };
+
   return (
-    <div className="campaign-card">
-      <h3>{title}</h3>
-      <p>{description}</p>
+    <div className="campaign-card" style={cardStyle}>
+      <div className="campaign-title">{title}</div>
     </div>
   );
 };
