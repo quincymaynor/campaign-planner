@@ -9,30 +9,32 @@ const Landing = () => {
     { imageUrl: 'https://i.pinimg.com/736x/63/2c/f9/632cf9e1062ec2d2dfc5cec7eae813df.jpg', title: 'Cosmic Carnival Capers', description: 'Venture into a mysterious sci-fi universe, where secrets and wonders await those who dare to explore its depths.' }
     // Add more campaign data as needed
   ];
-  
+
   return (
-      <div className="landing">
-        <div className="landing-header">
-          <h1>What story will you tell?</h1>
-          <p>Campaign Planner is your hub to create and share campaigns with your friends.</p>
-          <p>Create custom campaigns where you can let your imagination run wild!</p>
-        </div>
-    
-        <div className="landing-examples">
-          <h2>Examples</h2>
-          <div className="campaigns">
-            {campaigns.map((campaign, index) => (
-              <Campaign
-                key={index}
-                imageUrl={campaign.imageUrl}
-                title={campaign.title}
-                description={campaign.description}
-              />
-            ))}
-          </div>
+    <div className="landing">
+      <div className="landing-header">
+        <h1>
+          What story will <span className="main-title">you</span> tell?
+        </h1>
+        <p>Campaign Planner is your hub to create and share campaigns with your friends.</p>
+      </div>
+
+      <div className="landing-examples">
+      <p>Create custom campaigns where you can let your imagination run wild!</p>
+        <h2>Examples</h2>
+        <div className="campaigns">
+          {campaigns.map((campaign, index) => (
+            <Campaign
+              key={index}
+              imageUrl={campaign.imageUrl}
+              title={campaign.title}
+              description={campaign.description}
+            />
+          ))}
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default Landing;
