@@ -55,11 +55,15 @@ const typeDefs = `#graphql
     # add a campaign
     addCampaign(campaignAuthor: String!, createdAt: String!): Campaign
     # add a note
-    addNote(noteText: String!, noteAuthor: String!): Note
+    addNote(noteText: String!, noteAuthor: String!): Campaign
+    # update a campaign
+    updateCampaign: Campaign
+    # update a note
+    updateNote: Campaign
     # delete a campaign
     removeCampaign(campaignId: ID!): Campaign
     # delete a note
-    removeNote(noteId: ID!): Note
+    removeNote(noteId: ID!): Campaign
   }
 `;
 
