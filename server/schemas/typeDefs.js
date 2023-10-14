@@ -10,17 +10,20 @@ const typeDefs = `#graphql
 
   type Campaign {
     _id: ID!
-    campaignAuthor: String
-    createdAt: String
+    campaignTitle: String!
+    campaignAuthor: String!
+    createdAt: String!
     publicNotes: [Note]
     privateNotes: [Note]
   }
 
   type Note {
-    _id: ID
+    _id: ID!
+    noteTitle: String
     noteText: String!
     noteAuthor: String!
     createdAt: String!
+    public: Boolean
   }
 
   type Auth {
