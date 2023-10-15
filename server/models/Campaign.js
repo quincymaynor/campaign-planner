@@ -5,7 +5,7 @@ const campaignSchema = new Schema({
   campaignTitle: {
     type: String,
     required: true,
-    trim: true,
+
   },
   campaignAuthor: {
     type: String,

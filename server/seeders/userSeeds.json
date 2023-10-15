@@ -3,6 +3,13 @@
     "username": "User One",
     "email": "user1@gmail.com",
     "password": "1stpassword",
-    "gmCampaigns": []
+    "gmCampaigns": [],
+    "playerCampaigns": []
+  },
+  {
+    "username": "User Two",
+    "email": "user2@gmail.com",
+    "password": "2ndpassword",
+    "playerCampaigns": []
   }
 ]

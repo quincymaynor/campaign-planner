@@ -97,10 +97,11 @@ const resolvers = {
     },
     
     // Mutation resolver for creating a campaign
-    addCampaign: async (_parent, _args, context) => {
+    addCampaign: async (_parent, { campaignTitle }, context) => {
       if (context.user) {
         const campaign = await Campaign.create({
           campaignAuthor: context.user.username,
+          campaignTitle
         });
 
         console.log(campaign);
