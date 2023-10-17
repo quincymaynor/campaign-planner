@@ -5,7 +5,12 @@ const campaignSchema = new Schema({
   campaignTitle: {
     type: String,
     required: true,
-
+  },
+  campaignDescription: {
+    type: String,
+  },
+  campaignImage: {
+    type: String,
   },
   campaignAuthor: {
     type: String,
@@ -19,9 +24,13 @@ const campaignSchema = new Schema({
   },
   notes: [
     {
+      campaignId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Campaign'
+      },
       noteTitle: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
       },
       noteText: {

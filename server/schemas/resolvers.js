@@ -97,11 +97,14 @@ const resolvers = {
     },
     
     // Mutation resolver for creating a campaign
-    addCampaign: async (_parent, { campaignTitle }, context) => {
+    // can I make this and if else for gm/player campaign or do they need to be separate?
+    addCampaign: async (_parent, { campaignTitle, campaignDescription, campaignImage }, context) => {
       if (context.user) {
         const campaign = await Campaign.create({
           campaignAuthor: context.user.username,
-          campaignTitle
+          campaignTitle,
+          campaignDescription,
+          campaignImage
         });
 
         console.log(campaign);
@@ -118,28 +121,44 @@ const resolvers = {
     },
 
     // Mutation resolver for creating a note
-    addNote: async (_parent, { campaignId, noteText }, context) => {
+    addNote: async (_parent, { campaignId, noteTitle, noteText, public }, context) => {
+      console.log( campaignId, noteTitle, noteText, public )
       if (context.user) {
-        return Campaign.findOneAndUpdate(
-          { _id: campaignId },
-          {
-            $addToSet: {
-              notes: { noteText, noteAuthor: context.user.username },
+        if (public) {
+          return Campaign.findOneAndUpdate(
+            { _id: campaignId },
+            {
+              $addToSet: {
+                publicNotes: { noteTitle, noteText, noteAuthor: context.user.username },
+              },
             },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+        } else {
+          return Campaign.findOneAndUpdate(
+            { _id: campaignId },
+            {
+              $addToSet: {
+                privateNotes: { noteTitle, noteText, noteAuthor: context.user.username },
+              },
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+        }
       }
       throw AuthenticationError;
     },
 
     // Mutation resolver for updating a campaign
-    updateCampaign: async (_parent, { campaignTitle }) => {
+    updateCampaign: async (_parent, { campaignId, campaignTitle }) => {
       const campaign = await Campaign.findOneAndUpdate(
-        { _id: id }, 
+        { _id: campaignId }, 
         { campaignTitle }, 
         { new: true }
       );

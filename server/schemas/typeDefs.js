@@ -11,6 +11,8 @@ const typeDefs = `#graphql
   type Campaign {
     _id: ID!
     campaignTitle: String!
+    campaignDescription: String
+    campaignImage: String
     campaignAuthor: String!
     createdAt: String!
     publicNotes: [Note]
@@ -19,6 +21,7 @@ const typeDefs = `#graphql
 
   type Note {
     _id: ID!
+    campaignId: [Campaign]
     noteTitle: String
     noteText: String!
     noteAuthor: String!
@@ -56,11 +59,11 @@ const typeDefs = `#graphql
     # delete a user
     removeUser(userId: ID!): User
     # add a campaign
-    addCampaign(campaignTitle: String!, campaignAuthor: String!, createdAt: String!): Campaign
+    addCampaign(campaignTitle: String!, campaignDescription: String, campaignImage: String, campaignAuthor: String!, createdAt: String!): Campaign
     # add a note
-    addNote(noteText: String!, noteAuthor: String!): Campaign
+    addNote(campaignId: ID!, noteTitle: String, noteText: String!, noteAuthor: String!, public: Boolean): Campaign
     # update a campaign
-    updateCampaign: Campaign
+    updateCampaign(campaignId: ID!, campaignTitle: String): Campaign
     # update a note
     updateNote: Campaign
     # delete a campaign
