@@ -43,9 +43,6 @@ const startApolloServer = async () => {
     });
   });
 
-  // const foundUser = await User.findOne({ _id: "6528b2aa1348543e1e0a41a1" });
-  // console.log(foundUser);
-  // return foundUser;
 };
 
 // async function to start the server

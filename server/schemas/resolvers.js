@@ -39,9 +39,13 @@ const resolvers = {
       }
       return Campaign.find(params).sort({ createdAt: -1 });
     },
-    // Fetch a single campaigns
+    // Fetch a single campaign
     getCampaign: async (_parent, { campaignId }) => {
       return Campaign.findOne({ _id: campaignId });
+    },
+    // Fetch a single note
+    getNote: async (_parent, { campaignId, noteId }) => {
+      return Campaign.findOne({ _id: campaignId }).findOne({ _id: noteId });
     },
     // Fetch logged-in user's gm and player campaigns
     getMe: async (_parent, _args, context) => {
@@ -195,7 +199,7 @@ const resolvers = {
     },
 
     // Mutation resolver for deleting a note
-    removeNote: async (_parent, { campaignId, noteId }, context) => {
+    removeNote: async (_parent, { public, campaignId, noteId }, context) => {
       if (context.user) {
         if (public) {
           return Campaign.findOneAndUpdate(

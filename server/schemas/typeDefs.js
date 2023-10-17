@@ -45,6 +45,8 @@ const typeDefs = `#graphql
     getCampaigns(campaignAuthor: String!): [Campaign]
     # query to get a user's single campaign
     getCampaign(campaignId: ID!): Campaign
+    # query to get a single note
+    getNote(campaignId: ID!, noteId: ID!): Note
     # query to get all campaigns accessible to a user
     getMe: User
   }
@@ -69,7 +71,7 @@ const typeDefs = `#graphql
     # delete a campaign
     removeCampaign(campaignId: ID!): Campaign
     # delete a note
-    removeNote(noteId: ID!): Campaign
+    removeNote(campaignId: ID!, noteId: ID!): Campaign
   }
 `;
 
