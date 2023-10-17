@@ -338,3 +338,98 @@ footer {
   padding: 5px 10px; /* Adjust the padding to change the button size */
   border-radius: 10px; /* Adjust the border radius to match the other buttons */
 }
+
+/**
+ * PROFILE
+ */
+
+ .profile-container {
+  display: flex;
+  flex-direction: column; /* Change to column direction to stack elements vertically */
+  align-items: center; /* Center the content horizontally */
+  padding: 20px;
+  width: 80%;
+  margin: auto;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between; /* Add space between profile-text and profile-image */
+  width: 100%; /* Ensure full width of the container */
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-username {
+  font-weight: bold;
+  font-size: 36px;
+  margin-top: 10px; /* Add some spacing from the top */
+}
+
+.profile-email {
+  font-size: 16px;
+  color: #888;
+}
+
+.profile-created {
+  font-size: 14px; /* Adjust font size for account creation date */
+  color: #888;
+  margin-top: 10px;
+}
+
+.profile-cards {
+  display: flex;
+  justify-content: center; /* Center the cards horizontally */
+  margin-top: 30px;
+  gap: 20px; /* Add space between the cards */
+}
+
+.profile-card {
+  flex: 1; /* Distribute available space equally between cards */
+  height: 300px;
+  width: 225px;
+  border: 1px solid white;
+  border-radius: 25px;
+  color: white;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.profile-card-1 {
+  background:#FFB347;
+}
+.profile-card-2 {
+  background:#C3ABFF;
+}
+.profile-card-3 {
+  background:#A8D8B9;
+}
+
+
+.profile-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.profile-number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profile-text {
+  flex: 1; /* Occupy available space */
+}
+
+.profile-image {
+  flex: 1; /* Occupy available space */
+  display: flex;
+  justify-content: flex-end; /* Push the content to the right */
+  align-items: center; /* Center the content vertically */
+}
