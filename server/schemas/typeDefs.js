@@ -71,7 +71,7 @@ const typeDefs = `#graphql
     # delete a campaign
     removeCampaign(campaignId: ID!): Campaign
     # delete a note
-    removeNote(noteId: ID!): Campaign
+    removeNote(campaignId: ID!, noteId: ID!): Campaign
   }
 `;
 
