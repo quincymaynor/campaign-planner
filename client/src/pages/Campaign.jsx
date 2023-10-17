@@ -14,7 +14,7 @@ const Campaign = () => {
 
     const { loading, data, error } = useQuery(QUERY_CAMPAIGN);
 
-    const campaign = data?.user || {};
+    const campaign = data?.campaign || {};
     console.log('Loading:', loading);
     console.log('Error:', error);
     console.log('Data:', data);
