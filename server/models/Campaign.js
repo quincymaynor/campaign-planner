@@ -2,6 +2,16 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const campaignSchema = new Schema({
+  campaignTitle: {
+    type: String,
+    required: true,
+  },
+  campaignDescription: {
+    type: String,
+  },
+  campaignImage: {
+    type: String,
+  },
   campaignAuthor: {
     type: String,
     required: true,
@@ -14,6 +24,15 @@ const campaignSchema = new Schema({
   },
   notes: [
     {
+      campaignId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Campaign'
+      },
+      noteTitle: {
+        type: String,
+        required: false,
+        trim: true,
+      },
       noteText: {
         type: String,
         required: true,
@@ -28,6 +47,10 @@ const campaignSchema = new Schema({
         type: Date,
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
+      },
+      public: {
+        type: Boolean,
+        default: false,
       },
     },
   ],

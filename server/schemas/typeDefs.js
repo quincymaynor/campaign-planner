@@ -4,21 +4,29 @@ const typeDefs = `#graphql
     username: String!
     email: String!
     password: String!
-    campaigns: [Campaign]
+    gmCampaigns: [Campaign]
+    playerCampaigns: [Campaign]
   }
-  
+
   type Campaign {
     _id: ID!
+    campaignTitle: String!
+    campaignDescription: String
+    campaignImage: String
     campaignAuthor: String!
     createdAt: String!
-    notes: [Note]
+    publicNotes: [Note]
+    privateNotes: [Note]
   }
 
   type Note {
-    _id: ID
+    _id: ID!
+    campaignId: [Campaign]
+    noteTitle: String
     noteText: String!
     noteAuthor: String!
     createdAt: String!
+    public: Boolean
   }
 
   type Auth {
@@ -38,7 +46,7 @@ const typeDefs = `#graphql
     # query to get a user's single campaign
     getCampaign(campaignId: ID!): Campaign
     # query to get all campaigns accessible to a user
-    getMe(userId: ID!): [Campaign]
+    getMe: User
   }
 
   type Mutation {
@@ -51,13 +59,17 @@ const typeDefs = `#graphql
     # delete a user
     removeUser(userId: ID!): User
     # add a campaign
-    addCampaign(campaignAuthor: String!, createdAt: String!): Campaign
+    addCampaign(campaignTitle: String!, campaignDescription: String, campaignImage: String, campaignAuthor: String!, createdAt: String!): Campaign
     # add a note
-    addNote(noteText: String!, noteAuthor: String!): Note
+    addNote(campaignId: ID!, noteTitle: String, noteText: String!, noteAuthor: String!, public: Boolean): Campaign
+    # update a campaign
+    updateCampaign(campaignId: ID!, campaignTitle: String): Campaign
+    # update a note
+    updateNote: Campaign
     # delete a campaign
     removeCampaign(campaignId: ID!): Campaign
     # delete a note
-    removeNote(noteId: ID!): Note
+    removeNote(noteId: ID!): Campaign
   }
 `;
 

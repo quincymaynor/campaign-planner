@@ -7,7 +7,7 @@ const { AuthenticationError } = require('apollo-server-express'); // Use the cor
 
 const resolvers = {
   Query: {
-    // Example resolver for fetching user data
+    // Fetch logged-in user data
     getUser: async (_parent, _args, context) => {
       // Check if the user is authenticated
       if (!context.user) {
@@ -18,32 +18,37 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       return user;
     },
-    //this is to fetch a user by their USERNAME
-    user: async (_, { username }) => {
+    // Fetch a user by their USERNAME
+    user: async (_parent, { username }) => {
       const user = await User.findOne({ username });
       if (!user) {
         throw new AuthenticationError('User not found.');
       }
       return user;
     },
-    //all users for apollo or lists
+    // Fetch a list of users
     getUsers: async () => {
       const users = await User.find();
       return users;
     },
-
+    // Fetch a list of logged-in user's campaigns
     getCampaigns: async (_parent, { username }) => {
-      const params = username ? { username } : {};
+      const params = await username ? { username } : {};
+      if (!context.user) {
+        throw new AuthenticationError('Not authenticated.');
+      }
       return Campaign.find(params).sort({ createdAt: -1 });
     },
-
+    // Fetch a single campaigns
     getCampaign: async (_parent, { campaignId }) => {
       return Campaign.findOne({ _id: campaignId });
     },
-    
+    // Fetch logged-in user's gm and player campaigns
     getMe: async (_parent, _args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('campaigns');
+        const foundUser = await User.findOne({ _id: context.user._id }).populate(['gmCampaigns', 'playerCampaigns']);
+        console.log(foundUser);
+        return foundUser;
       }
       throw AuthenticationError;
     },
@@ -92,15 +97,22 @@ const resolvers = {
     },
     
     // Mutation resolver for creating a campaign
-    addCampaign: async (_parent, _args, context) => {
+    // can I make this and if else for gm/player campaign or do they need to be separate?
+    addCampaign: async (_parent, { campaignTitle, campaignDescription, campaignImage }, context) => {
       if (context.user) {
         const campaign = await Campaign.create({
           campaignAuthor: context.user.username,
+          campaignTitle,
+          campaignDescription,
+          campaignImage
         });
 
-        await User.findOneAndUpdate(
+        console.log(campaign);
+
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { campaigns: campaign._id } }
+          { $addToSet: { gmCampaigns: campaign } },
+          {new: true}
         );
 
         return campaign;
@@ -109,22 +121,59 @@ const resolvers = {
     },
 
     // Mutation resolver for creating a note
-    addNote: async (_parent, { campaignId, noteText }, context) => {
+    addNote: async (_parent, { campaignId, noteTitle, noteText, public }, context) => {
+      console.log( campaignId, noteTitle, noteText, public )
       if (context.user) {
-        return Campaign.findOneAndUpdate(
-          { _id: campaignId },
-          {
-            $addToSet: {
-              notes: { noteText, noteAuthor: context.user.username },
+        if (public) {
+          return Campaign.findOneAndUpdate(
+            { _id: campaignId },
+            {
+              $addToSet: {
+                publicNotes: { noteTitle, noteText, noteAuthor: context.user.username },
+              },
             },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+        } else {
+          return Campaign.findOneAndUpdate(
+            { _id: campaignId },
+            {
+              $addToSet: {
+                privateNotes: { noteTitle, noteText, noteAuthor: context.user.username },
+              },
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+        }
       }
       throw AuthenticationError;
+    },
+
+    // Mutation resolver for updating a campaign
+    updateCampaign: async (_parent, { campaignId, campaignTitle }) => {
+      const campaign = await Campaign.findOneAndUpdate(
+        { _id: campaignId }, 
+        { campaignTitle }, 
+        { new: true }
+      );
+
+      return campaign;
+    },
+
+    // Mutation resolver for updating a note
+    updateNote: async (_parent, { noteTitle, noteText, public }) => {
+      const note = await Campaign.findOneAndUpdate(
+        { _id: id }, 
+        { noteTitle, noteText, public }, 
+        { new: true });
+
+      return note;
     },
 
     // Mutation resolver for deleting a campaign
