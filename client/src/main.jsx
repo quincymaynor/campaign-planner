@@ -47,6 +47,8 @@ const router = createBrowserRouter([
       {
         path: '/note-form', // Define the route with a username parameter
         element: <NoteForm />
+      },
+      {
         path: '/campaign/:campaignId',
         element: <Campaign />
       },
