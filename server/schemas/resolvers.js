@@ -43,6 +43,10 @@ const resolvers = {
     getCampaign: async (_parent, { campaignId }) => {
       return Campaign.findOne({ _id: campaignId });
     },
+    // Fetch a single note
+    getNote: async (_parent, { campaignId, noteId }) => {
+      return Campaign.findOne({ _id: campaignId }).findOne({ _id: noteId });
+    },
     // Fetch logged-in user's gm and player campaigns
     getMe: async (_parent, _args, context) => {
       if (context.user) {
@@ -198,8 +202,30 @@ const resolvers = {
     removeNote: async (_parent, { campaignId, noteId }, context) => {
       if (context.user) {
         if (public) {
-          return Campaign.findOneAndUpdate(
-            { _id: campaignId },
+          const currentUser = await User.findOne({_id:context.user._id});
+          const changeUser = currentUser.gmCampaigns.map((note) => {
+            console.log('changeUser', changeUser);
+            console.log(args._id);
+            if (note._id.toString() === args._id) {
+              alert('this is true')
+            } else {
+              return note
+            }
+          })
+          // return Campaign.findOneAndUpdate(
+          //   { _id: campaignId },
+          //   {
+          //     $pull: {
+          //       publicNotes: {
+          //         _id: noteId,
+          //         noteAuthor: context.user.username,
+          //       },
+          //     },
+          //   },
+          //   { new: true }
+          // );
+          await Campaign.findOneAndUpdate(
+            { _id: context.user._id },
             {
               $pull: {
                 publicNotes: {
@@ -210,20 +236,21 @@ const resolvers = {
             },
             { new: true }
           );
-        } else {
-          return Campaign.findOneAndUpdate(
-            { _id: campaignId },
-            {
-              $pull: {
-                privateNotes: {
-                  _id: noteId,
-                  noteAuthor: context.user.username,
-                },
-              },
-            },
-            { new: true }
-          );
-        }
+          } 
+          // else {
+          //   return Campaign.findOneAndUpdate(
+          //     { _id: campaignId },
+          //     {
+          //       $pull: {
+          //         privateNotes: {
+          //           _id: noteId,
+          //           noteAuthor: context.user.username,
+          //         },
+          //       },
+          //     },
+          //     { new: true }
+          //   );
+          // }
       }
       throw AuthenticationError;
     },

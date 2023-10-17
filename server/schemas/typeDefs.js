@@ -45,6 +45,8 @@ const typeDefs = `#graphql
     getCampaigns(campaignAuthor: String!): [Campaign]
     # query to get a user's single campaign
     getCampaign(campaignId: ID!): Campaign
+    # query to get a single note
+    getNote(campaignId: ID!, noteId: ID!): Note
     # query to get all campaigns accessible to a user
     getMe: User
   }
