@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Landing from './pages/Landing';
 import CampaignForm from './components/CampaignForm';
 import NoteForm from './components/NoteForm';
+import Campaign from './pages/Campaign';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,8 @@ const router = createBrowserRouter([
       {
         path: '/note-form', // Define the route with a username parameter
         element: <NoteForm />
+        path: '/campaign/:campaignId',
+        element: <Campaign />
       },
       {
         path: '*', // Catch-all route for undefined routes
