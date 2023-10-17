@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_NOTE } from '../../utils/mutations';
+import { ADD_NOTE } from '../utils/mutations';
 
-import Auth from '../../utils/auth';
+import Auth from '../utils/auth';
 
 const NoteForm = ({ thoughtId }) => {
   const [noteTitle, setNoteTitle] = useState('');
   const [noteText, setNoteText] = useState('');
-  const [public, setPublic] = useState('false');
+  const [notePublic, setNotePublic] = useState('false');
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addNote, { error }] = useMutation(ADD_NOTE);
@@ -23,7 +23,7 @@ const NoteForm = ({ thoughtId }) => {
           campaignId,
           noteTitle,
           noteText,
-          public,
+          notePublic,
           noteAuthor: Auth.getProfile().authenticatedPerson.username
         },
       });

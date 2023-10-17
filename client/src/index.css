@@ -463,3 +463,93 @@ footer {
   filter: drop-shadow(2px 2px #333);
 }
 
+/**/
+/** HOME/DASHBOARD PAGE **/
+/**/
+
+/* Menu styles */
+.menu {
+  background-color: #333; /* Background color for the menu */
+  color: #fff; /* Text color */
+  padding: 20px;
+}
+
+.menu h2 {
+  font-size: 1.5rem; /* Adjust the font size for "Tools" */
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu ul li {
+  margin-bottom: 10px; /* Adjust the spacing between menu items */
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem; /* Adjust the font size for menu links */
+}
+
+/* Dashboard styles */
+.dashboard {
+  display: flex; /* Use flex display to create a two-column layout */
+}
+
+/* Menu container styles */
+.menu-container {
+  background-color: #333; /* Background color for the menu container */
+  color: #fff; /* Text color */
+  padding: 20px;
+}
+
+.menu h2 {
+  font-size: 1.5rem;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu ul li {
+  margin-bottom: 10px;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Dashboard container styles */
+.dashboard-container {
+  flex: 1; /* Allow the dashboard container to expand and fill the remaining space */
+  background-color: #f2f2f2; /* Background color for the dashboard container */
+  padding: 20px;
+}
+
+/* Center the Dashboard title */
+.dashboard h1 {
+  text-align: center;
+}
+
+/* Style the "Welcome home" text */
+.dashboard h3 {
+  text-align: center;
+  margin: 2em 0;
+}
+
+/* Apply margins to the campaign card container */
+.campaign-card-container {
+  margin: 0 30px;
+}
+
+/* Adjust campaign card alignment */
+.campaign-card-container .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

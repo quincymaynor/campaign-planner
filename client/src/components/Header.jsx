@@ -15,9 +15,15 @@ const Header = () => {
     <header>
       <div className="container">
         <div className="header-content">
-          <Link to="/" className="logo-container">
+        {isLoggedIn ? (
+          <Link to="/home" className="logo-container">
+           <img src={logo} alt="Campaign Planner Logo" />
+          </Link>
+        ) : (
+           <Link to="/" className="logo-container">
             <img src={logo} alt="Campaign Planner Logo" />
           </Link>
+            )}
           <div className="header-buttons">
             {isLoggedIn ? (
               <>
