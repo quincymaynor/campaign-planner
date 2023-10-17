@@ -1,13 +1,17 @@
 import React from 'react';
 import Campaign from '../components/Campaign';
+import { getRandomCampaignImage } from '../utils/imagePicker';
 
 const Landing = () => {
 
+  const randomCampaignImage1 = getRandomCampaignImage();
+  const randomCampaignImage2 = getRandomCampaignImage();
+  const randomCampaignImage3 = getRandomCampaignImage();
+
   const campaigns = [
-    { imageUrl: 'https://i.pinimg.com/736x/c5/0d/ea/c50deac621d9831f53f86bdc826fabb5.jpg', title: 'Quest for the Enchanted Cheese', description: 'Embark on an epic journey through uncharted lands, where youll uncover hidden treasures and face ancient foes.' },
-    { imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe5nowxSW9buY6RpTNR-nqAQQlz_Awyt9m4A&usqp=CAU', title: 'Dragon Slaying Shenanigans', description: 'Join a band of brave adventurers as they attempt to save their kingdom from the clutches of a menacing dragon.' },
-    { imageUrl: 'https://i.pinimg.com/736x/63/2c/f9/632cf9e1062ec2d2dfc5cec7eae813df.jpg', title: 'Cosmic Carnival Capers', description: 'Venture into a mysterious sci-fi universe, where secrets and wonders await those who dare to explore its depths.' }
-    // Add more campaign data as needed
+    { imageUrl: `${randomCampaignImage1}`, title: 'Quest for the Enchanted Cheese', description: 'Embark on an epic journey through uncharted lands, where youll uncover hidden treasures and face ancient foes.' },
+    { imageUrl: `${randomCampaignImage2}`, title: 'Dragon Slaying Shenanigans', description: 'Join a band of brave adventurers as they attempt to save their kingdom from the clutches of a menacing dragon.' },
+    { imageUrl: `${randomCampaignImage3}`, title: 'Cosmic Carnival Capers', description: 'Venture into a mysterious sci-fi universe, where secrets and wonders await those who dare to explore its depths.' }
   ];
 
   return (

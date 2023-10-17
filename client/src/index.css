@@ -343,6 +343,10 @@ footer {
  * PROFILE
  */
 
+ .profile{
+  margin-bottom: 30px;
+ }
+
  .profile-container {
   display: flex;
   flex-direction: column; /* Change to column direction to stack elements vertically */
@@ -367,6 +371,11 @@ footer {
   margin-top: 10px; /* Add some spacing from the top */
 }
 
+.standout {
+  font-family: 'Young Serif', serif;
+  transform: uppercase;
+}
+
 .profile-email {
   font-size: 16px;
   color: #888;
@@ -386,7 +395,7 @@ footer {
 }
 
 .profile-card {
-  flex: 1; /* Distribute available space equally between cards */
+  flex: 1;
   height: 300px;
   width: 225px;
   border: 1px solid white;
@@ -394,6 +403,10 @@ footer {
   color: white;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-card-1 {
@@ -412,15 +425,16 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.profile-card h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
 .profile-number {
-  font-size: 24px;
+  font-size: 48px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:auto;
+  padding-bottom: 10%;
+  color: white;
+  text-shadow: black 0px 0px 10px;
 }
 
 .profile-text {
@@ -433,3 +447,19 @@ footer {
   justify-content: flex-end; /* Push the content to the right */
   align-items: center; /* Center the content vertically */
 }
+
+.profile-image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Rounded shape for the image */
+  border: 1px solid white; /* White border around the image */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Black glow around the image */
+}
+
+.profile-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10%;
+  filter: drop-shadow(2px 2px #333);
+}
+
