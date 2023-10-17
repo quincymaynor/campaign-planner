@@ -23,5 +23,25 @@ query getMe {
     }
     username
   }
+`;
 
+export const QUERY_CAMPAIGN = gql`
+query GetCampaign($campaignId: ID!) {
+  getCampaign(campaignId: $campaignId) {
+    campaignTitle
+    campaignDescription
+    campaignImage
+    createdAt
+    privateNotes {
+      noteTitle
+      noteText
+      createdAt
+    }
+    publicNotes {
+      noteTitle
+      noteText
+      createdAt
+    }
+  }
+}
 `;
