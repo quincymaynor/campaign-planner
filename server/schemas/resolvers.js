@@ -197,18 +197,33 @@ const resolvers = {
     // Mutation resolver for deleting a note
     removeNote: async (_parent, { campaignId, noteId }, context) => {
       if (context.user) {
-        return Campaign.findOneAndUpdate(
-          { _id: campaignId },
-          {
-            $pull: {
-              notes: {
-                _id: noteId,
-                noteAuthor: context.user.username,
+        if (public) {
+          return Campaign.findOneAndUpdate(
+            { _id: campaignId },
+            {
+              $pull: {
+                publicNotes: {
+                  _id: noteId,
+                  noteAuthor: context.user.username,
+                },
               },
             },
-          },
-          { new: true }
-        );
+            { new: true }
+          );
+        } else {
+          return Campaign.findOneAndUpdate(
+            { _id: campaignId },
+            {
+              $pull: {
+                privateNotes: {
+                  _id: noteId,
+                  noteAuthor: context.user.username,
+                },
+              },
+            },
+            { new: true }
+          );
+        }
       }
       throw AuthenticationError;
     },

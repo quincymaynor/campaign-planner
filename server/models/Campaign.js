@@ -22,7 +22,7 @@ const campaignSchema = new Schema({
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
-  notes: [
+  publicNotes: [
     {
       campaignId: {
         type: Schema.Types.ObjectId,
@@ -50,7 +50,37 @@ const campaignSchema = new Schema({
       },
       public: {
         type: Boolean,
-        default: false,
+      },
+    },
+  ],
+  privateNotes: [
+    {
+      campaignId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Campaign'
+      },
+      noteTitle: {
+        type: String,
+        required: false,
+        trim: true,
+      },
+      noteText: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 10000,
+      },
+      noteAuthor: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+      public: {
+        type: Boolean,
       },
     },
   ],
