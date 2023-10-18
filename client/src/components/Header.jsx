@@ -30,25 +30,25 @@ const Header = () => {
                 <Link to="/profile" className="header-button">
                   {AuthService.getProfile().authenticatedPerson.username}'s Profile
                 </Link>
-                <button className="header-button" onClick={logout}>
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="header-button">
-                  Login
-                </Link>
-                <Link to="/signup" className="header-button">
-                  Signup
-                </Link>
-              </>
-            )}
+                  <button className="header-button" onClick={logout}>
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="header-button">
+                    Login
+                  </Link>
+                  <Link to="/signup" className="header-button">
+                    Signup
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-  );
-};
+      </header>
+    );
+  };
 
-export default Header;
+  export default Header;
