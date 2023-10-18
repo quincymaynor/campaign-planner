@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom'; // Import the Navigate component
 import { QUERY_CAMPAIGN } from '../utils/queries';
 import AuthService from '../utils/auth';
 import Tools from '../components/Tools';
-import CampaignList from '../components/CampaignList';
+import NoteList from '../components/NoteList';
 
 const Campaign = () => {
     // Get campaign id from the url
@@ -49,12 +49,12 @@ const Campaign = () => {
                     <div className="col-12 col-md-10 mb-3 p-3">
                         <div className="campaign-card-container">
                             <div>
-                                <CampaignList
-                                    campaigns={privateNotes}
+                                <NoteList
+                                    notes={privateNotes}
                                     title="My Private Notes"
                                 />
-                                <CampaignList
-                                    campaigns={publicNotes}
+                                <NoteList
+                                    notes={publicNotes}
                                     title="My Public Notes"
                                 />
                             </div>

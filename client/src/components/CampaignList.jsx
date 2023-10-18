@@ -9,14 +9,13 @@ const CampaignList = ({ campaigns, title }) => {
         return (
             <div className="row">
               {campaigns.map((campaign, index) => (
-
-                  <Campaign
-                      key={index}
-                      link={`/campaign/${campaign._id}`}
-                      imageUrl={campaign.campaignImage}
-                      title={campaign.campaignTitle}
-                      description={campaign.campaignDescription}
-                  >
+                <Campaign
+                    key={index}
+                    link={`/campaign/${campaign._id}`}
+                    imageUrl={campaign.campaignImage}
+                    title={campaign.campaignTitle}
+                    description={campaign.campaignDescription}
+                >
                 {console.log(campaign)}
                 </Campaign>
               ))}
