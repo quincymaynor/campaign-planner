@@ -1,5 +1,5 @@
 import React from 'react';
-import Campaign from './Campaign';
+import NoteCard from './NoteCard';
 
 const NoteList = ({ notes, title }) => {
 
@@ -9,14 +9,14 @@ const NoteList = ({ notes, title }) => {
         return (
             <div className="row">
               {notes.map((note, index) => (
-                <Campaign
+                <NoteCard
                     key={index}
                     link={`/note/${note._id}`}
                     title={note.noteTitle}
                     description={note.noteText}
                 >
                 {console.log(note)}
-                </Campaign>
+                </NoteCard>
               ))}
             </div>
           );
