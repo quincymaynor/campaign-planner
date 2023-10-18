@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const campaignSchema = require('./Campaign');
 
 const userSchema = new Schema({
   username: {
@@ -28,6 +29,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Campaign"
   }],
+  // gmCampaigns: [campaignSchema],
   playerCampaigns: [{
     type: Schema.Types.ObjectId,
     ref: "Campaign"

@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client'; // Import useQuery from Apollo Client
-import AuthService from '../utils/auth';
-import Campaign from '../components/Campaign';
 import { QUERY_ME } from '../utils/queries'; // Import your QUERY_ME if it's not already imported
+import AuthService from '../utils/auth';
+import CampaignList from '../components/CampaignList';
 
 const Home = () => {
   const isLoggedIn = AuthService.loggedIn();
   const username = isLoggedIn ? AuthService.getProfile().authenticatedPerson.username : '';
-  const { loading, data } = useQuery(QUERY_ME)
-
-  const gmCampaigns = data?.gmCampaigns || [];
-  const playerCampaigns = data?.playerCampaigns || [];
+  const { data } = useQuery(QUERY_ME)
 
   const user = data?.getMe || {};
-  console.log('Loading:', loading);
+  const gmCampaigns = data?.getMe.gmCampaigns || [];
+  const playerCampaigns = data?.getMe.playerCampaigns || [];
+
   console.log('Data:', data);
+  console.log('gmCampaigns', gmCampaigns);
+  console.log('user', user);
 
   return (
     <main>
@@ -48,11 +49,15 @@ const Home = () => {
               {isLoggedIn && (
                 <div>
                   <div className="campaign-card-container">
-                    <h4 className="mt-3">My Campaigns:</h4>
-                    <div className="row">
-                      <Campaign title="Campaign 1" />
-                      <Campaign title="Campaign 2" />
-                      {/* Add more Campaign components for each campaign */}
+                    <div>
+                      <CampaignList
+                        campaigns={gmCampaigns}
+                        title="GM Campaigns"
+                      />
+                      <CampaignList
+                        campaigns={playerCampaigns}
+                        title="Player Campaigns"
+                      />
                     </div>
                   </div>
                 </div>

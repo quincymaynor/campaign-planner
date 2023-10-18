@@ -202,8 +202,30 @@ const resolvers = {
     removeNote: async (_parent, { public, campaignId, noteId }, context) => {
       if (context.user) {
         if (public) {
-          return Campaign.findOneAndUpdate(
-            { _id: campaignId },
+          const currentUser = await User.findOne({_id:context.user._id});
+          const changeUser = currentUser.gmCampaigns.map((note) => {
+            console.log('changeUser', changeUser);
+            console.log(args._id);
+            if (note._id.toString() === args._id) {
+              alert('this is true')
+            } else {
+              return note
+            }
+          })
+          // return Campaign.findOneAndUpdate(
+          //   { _id: campaignId },
+          //   {
+          //     $pull: {
+          //       publicNotes: {
+          //         _id: noteId,
+          //         noteAuthor: context.user.username,
+          //       },
+          //     },
+          //   },
+          //   { new: true }
+          // );
+          await Campaign.findOneAndUpdate(
+            { _id: context.user._id },
             {
               $pull: {
                 publicNotes: {
@@ -214,20 +236,21 @@ const resolvers = {
             },
             { new: true }
           );
-        } else {
-          return Campaign.findOneAndUpdate(
-            { _id: campaignId },
-            {
-              $pull: {
-                privateNotes: {
-                  _id: noteId,
-                  noteAuthor: context.user.username,
-                },
-              },
-            },
-            { new: true }
-          );
-        }
+          } 
+          // else {
+          //   return Campaign.findOneAndUpdate(
+          //     { _id: campaignId },
+          //     {
+          //       $pull: {
+          //         privateNotes: {
+          //           _id: noteId,
+          //           noteAuthor: context.user.username,
+          //         },
+          //       },
+          //     },
+          //     { new: true }
+          //   );
+          // }
       }
       throw AuthenticationError;
     },
