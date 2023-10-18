@@ -8,6 +8,41 @@ import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const CampaignForm = () => {
+
+  const campaignImages = [
+    'Apocalypse-Setting-1.png',
+    'Castle-1.png',
+    'Castle-2.png',
+    'Cyberpunk-Setting-1.png',
+    'Cyberpunk-Setting-2.png',
+    'Dungeon-Setting-1.png',
+    'Floating-Islands-Setting-1.png',
+    'Flying-Cars-Setting-1.png',
+    'Flying-Cars-Setting-2.png',
+    'Forest-Setting-1.png',
+    'Forest-Setting-2.png',
+    'Jungle-Setting-1.png',
+    'Jungle-Setting-2.png',
+    'Medieval-City-1.png',
+    'Medieval-Table-Setting.png',
+    'Mountain-Setting-1.png',
+    'Mountain-Setting-2.png',
+    'Mountain-Setting-3.png',
+    'Mountain-Setting-4.png',
+    'Night-Setting-1.png',
+    'Snow-Biome-1.png',
+    'Town-Setting-1.png',
+    'Western-Setting-1.png'
+  ];
+
+  const [selectedImage, setSelectedImage] = useState(campaignImages[0]);
+  const [campaignImage, setCampaignImage] = useState(selectedImage); // New state for campaignImage
+  const handleImageChange = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedImage(selectedValue);
+    setCampaignImage(selectedValue); // Update campaignImage state
+  };
+
   const [campaignTitle, setCampaignTitle] = useState('');
   const [campaignDescription, setCampaignDescription] = useState('');
 
@@ -21,19 +56,43 @@ const CampaignForm = () => {
       ]
     });
 
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const { data } = await addCampaign({
+  //       variables: {
+  //         campaignTitle,
+  //         campaignDescription,
+  //         campaignAuthor: Auth.getProfile().authenticatedPerson.username
+  //       },
+  //     });
+
+  //     setCampaignTitle('');
+  //     setCampaignDescription('');
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await addThought({
-        variables: {
-          campaignTitle,
-          campaignDescription,
-          campaignAuthor: Auth.getProfile().authenticatedPerson.username
-        },
+      const formData = {
+        campaignTitle,
+        campaignDescription,
+        campaignAuthor: Auth.getProfile().authenticatedPerson.username,
+        campaignImage, // Include campaignImage in the data
+      };
+  
+      console.log('Form Data:', formData); // Add this line to log the form data
+  
+      const { data } = await addCampaign({
+        variables: formData,
       });
-
+  
       setCampaignTitle('');
       setCampaignDescription('');
+      setCampaignImage(selectedImage); // Reset the selected image
     } catch (err) {
       console.error(err);
     }
@@ -48,69 +107,63 @@ const CampaignForm = () => {
     }
   };
 
+  const handleTitleChange = (event) => {
+    setCampaignTitle(event.target.value);
+  };
+
   return (
-    <div>
-      <h3></h3>
-
-      {Auth.loggedIn() ? (
-        <>
-          <p
-            className={`m-0 ${characterCount === 500 || error ? 'text-danger' : ''
-              }`}
-          >
-            Character Count: {characterCount}/500
-          </p>
-          <form
-            className=""
-            onSubmit={handleFormSubmit}
-          >
-            <div className="">
-              <label>Campaign Title</label>
-              <textarea
-                type="text"
-                name="campaignTitle"
-                placeholder="Title"
-                value={campaignTitle}
-                className=""
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChange}
-              ></textarea>
-
-              <label>Campaign Description</label>
-              <textarea
-                type="text"
-                name="campaignDescription"
-                placeholder="Description"
-                value={campaignDescription}
-                className=""
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-
-            <select name="" id="">
-              <option>Select an image</option>
-            </select>
-
-            <div className="">
-              <button className="" type="submit">
-                Add Campaign
-              </button>
-            </div>
-            {error && (
-              <div className="">
-                {error.message}
-              </div>
-            )}
-          </form>
-        </>
-      ) : (
-        <p>
-          You need to be logged in to make a campaign. Please{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
-      )}
-    </div>
+    <div className="campaign-form-container">
+    <h3 className="campaign-form-header">Campaign Form</h3>
+  
+    <form onSubmit={handleFormSubmit}>
+      <div className="campaign-form-group">
+        <div className="campaign-title-description-container">
+          <label>Campaign Title</label>
+          <input
+            type="text"
+            name="campaignTitle"
+            placeholder="Title"
+            defaultValue="Title"
+            onChange={handleTitleChange}
+            className="campaign-image-selector"
+          ></input>
+  
+          <label>Campaign Description</label>
+          <textarea
+            type="text"
+            name="campaignDescription"
+            placeholder="Description"
+            value={campaignDescription}
+            className="campaign-image-selector"
+            style={{ lineHeight: '1.5', resize: 'vertical' }}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+      </div>
+  
+      <p className="character-count">
+        Character Count: {characterCount}/500
+      </p>
+  
+      <div className="campaign-image-container">
+      <h3 className="campaign-form-header">Select Campaign Image</h3>
+  <select className="campaign-image-selector" value={selectedImage} onChange={handleImageChange}>
+    {campaignImages.map((imageName) => (
+      <option key={imageName} value={imageName}>
+        {imageName}
+      </option>
+    ))}
+  </select>
+  <div className="campaign-image-preview">
+    <img className="campaign-image" src={`/Campaign-Images/${selectedImage}`} alt="Selected Campaign Image" />
+  </div>
+</div>
+  
+      <button className="campaign-add-button" type="submit">
+        Add Campaign
+      </button>
+    </form>
+  </div>
   );
 };
 

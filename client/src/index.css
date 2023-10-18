@@ -1,4 +1,4 @@
-/* Reset CSS */
+Reset CSS
 
 /* Remove default margin and padding */
 * {
@@ -573,3 +573,77 @@ footer {
   margin-right: 10px; /* Add some space between checkbox and text */
 }
 
+/* Campaign Form Styles */
+.campaign-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff; /* Background color for the form container */
+}
+
+.campaign-form-header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Young Serif', serif;
+  margin-bottom: 20px;
+}
+
+.campaign-form-group {
+  margin: 10px 0;
+}
+
+.campaign-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.campaign-image-selector {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #333; /* Match the Header buttons border color */
+  border-radius: 25px; /* Match the border radius of Header buttons */
+  font-size: 16px;
+}
+
+.campaign-image-selector:focus {
+  outline: none;
+  border: 2px solid #555; /* Adjust the border color on focus */
+}
+
+.campaign-image-preview {
+  text-align: center;
+}
+
+.campaign-add-button {
+  background-color: #333; /* Dark gray background */
+  color: white;
+  border: 1px solid white; /* White border */
+  border-radius: 25px; /* Match the border radius of Header buttons */
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s; /* Add box-shadow transition */
+  font-family: 'Young Serif', serif;
+  margin-top: 20px; /* Add spacing between button and other elements */
+}
+
+.campaign-add-button:hover {
+  background: black; /* Dark background on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
+}
+
+.campaign-image {
+  width:300px;
+  height:300px;
+}
+
+.character-count {
+  margin-top:0px;
+  margin-bottom: 20px;
+}
