@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { Navigate } from 'react-router-dom'; // Import the Navigate component
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import AuthService from '../utils/auth';
+import { getRandomCampaignImage } from '../utils/imagePicker';
 
 const Profile = () => {
   const { username: userParam } = useParams();
@@ -18,6 +19,13 @@ const Profile = () => {
   console.log('Loading:', loading);
   console.log('Error:', error);
   console.log('Data:', data);
+
+  // //populate background images
+  const randomCampaignImage1 = getRandomCampaignImage();
+  const randomCampaignImage2 = getRandomCampaignImage();
+  const randomCampaignImage3 = getRandomCampaignImage();
+
+  
 
     // Check if the user is authenticated
     if (!AuthService.loggedIn()) {
@@ -43,11 +51,11 @@ const Profile = () => {
   <div className="profile-info">
     <div className="profile-text">
       <h2 className="profile-username">
-        {user?.username || 'null'}{' '}
-        <span className="profile-email">({user.email || 'null'})</span>
+        <span className="standout">{user?.username || 'null'}{' '}</span>
+        <span className="profile-email">({user?.email || 'null'})</span>
       </h2>
       <p className="profile-created">
-        Account created on: {user.createdOn || 'null'}
+        Account created on: {user?.createdOn || 'null'}
       </p>
     </div>
 
@@ -56,18 +64,26 @@ const Profile = () => {
     </div>
   </div>
 
-
     <div className="profile-cards">
-      <div className="profile-card profile-card-1">
-        <h3>Friends</h3>
+      <div className="profile-card" style={{
+          backgroundImage: `url(${randomCampaignImage1})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'}}>
+        <p className="profile-card-title">Friends</p>
         <p className="profile-number">##</p>
       </div>
-      <div className="profile-card profile-card-2">
-        <h3>Campaigns Created</h3>
+      <div className="profile-card" style={{
+          backgroundImage: `url(${randomCampaignImage2})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'}}>
+      <p className="profile-card-title">Campaigns Created</p>
         <p className="profile-number">##</p>
       </div>
-      <div className="profile-card profile-card-3">
-        <h3>Campaigns Joined</h3>
+      <div className="profile-card" style={{
+          backgroundImage: `url(${randomCampaignImage3})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'}}>
+      <p className="profile-card-title">Campaigns Joined</p>
         <p className="profile-number">##</p>
       </div>
     </div>
