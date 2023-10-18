@@ -553,3 +553,23 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/** ADDITIONAL STYLES **/
+
+.note-public-checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.note-public-checkbox label {
+  margin-right: 10px; /* Add spacing between the label and the checkbox */
+  font-size: 18px; /* Adjust the text size */
+}
+
+/* Style the checkbox itself */
+.note-form-checkbox input[type="checkbox"] {
+  margin-right: 10px; /* Add some space between checkbox and text */
+}
+
