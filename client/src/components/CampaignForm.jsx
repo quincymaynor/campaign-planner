@@ -14,12 +14,12 @@ const CampaignForm = () => {
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addCampaign, { error }] = useMutation
-  (ADD_CAMPAIGN, {
-    refetchQueries: [
-      QUERY_ME,
-      'me'
-    ]
-  });
+    (ADD_CAMPAIGN, {
+      refetchQueries: [
+        QUERY_ME,
+        'me'
+      ]
+    });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -55,9 +55,8 @@ const CampaignForm = () => {
       {Auth.loggedIn() ? (
         <>
           <p
-            className={`m-0 ${
-              characterCount === 500 || error ? 'text-danger' : ''
-            }`}
+            className={`m-0 ${characterCount === 500 || error ? 'text-danger' : ''
+              }`}
           >
             Character Count: {characterCount}/500
           </p>
@@ -66,15 +65,32 @@ const CampaignForm = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="">
+              <label>Campaign Title</label>
               <textarea
-                name=""
-                placeholder=""
+                type="text"
+                name="campaignTitle"
+                placeholder="Title"
+                value={campaignTitle}
+                className=""
+                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                onChange={handleChange}
+              ></textarea>
+
+              <label>Campaign Description</label>
+              <textarea
+                type="text"
+                name="campaignDescription"
+                placeholder="Description"
                 value={campaignDescription}
                 className=""
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
               ></textarea>
             </div>
+
+            <select name="" id="">
+              <option>Select an image</option>
+            </select>
 
             <div className="">
               <button className="" type="submit">
