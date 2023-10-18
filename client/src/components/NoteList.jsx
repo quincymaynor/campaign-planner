@@ -7,6 +7,10 @@ const NoteList = ({ notes, title }) => {
       return <h3>No {title} Yet</h3>;
     } else {
         return (
+          <div>
+            <div className="">
+              <h1>{title}</h1>
+            </div>
             <div className="row">
               {notes.map((note, index) => (
                 <NoteCard
@@ -19,6 +23,7 @@ const NoteList = ({ notes, title }) => {
                 </NoteCard>
               ))}
             </div>
+          </div>
           );
     }
   };

@@ -46,11 +46,11 @@ const Campaign = () => {
                                     <div>
                                         <NoteList
                                             notes={privateNotes}
-                                            title="My Private Notes"
+                                            title="Private Notes"
                                         />
                                         <NoteList
                                             notes={publicNotes}
-                                            title="My Public Notes"
+                                            title="Public Notes"
                                         />
                                     </div>
                                 </div>
