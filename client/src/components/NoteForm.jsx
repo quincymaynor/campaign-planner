@@ -16,7 +16,7 @@ const NoteForm = () => {
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.getMe || {};
 
-  const campaignOptions = user.campaigns && user.campaigns.length > 0
+  const campaignOptions = user.gmCampaigns && user.gmCampaigns.length > 0
   ? [
       <option key="default" value="">
         Select Campaign
