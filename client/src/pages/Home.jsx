@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client'; // Import useQuery from Apollo Client
 import AuthService from '../utils/auth';
 import Campaign from '../components/Campaign';
-import { QUERY_ME } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries'; // Import your QUERY_ME if it's not already imported
 
 const Home = () => {
   const isLoggedIn = AuthService.loggedIn();
@@ -12,6 +13,10 @@ const Home = () => {
 
   const gmCampaigns = data?.gmCampaigns || [];
   const playerCampaigns = data?.playerCampaigns || [];
+
+  const user = data?.getMe || {};
+  console.log('Loading:', loading);
+  console.log('Data:', data);
 
   return (
     <main>
