@@ -11,18 +11,51 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-query getMe {
+query GetMe {
+  getMe {
     _id
     email
+    username
     gmCampaigns {
       _id
+      campaignTitle
+      campaignDescription
+      campaignImage
+      createdAt
+      publicNotes {
+        _id
+        noteTitle
+        noteText
+        createdAt
+      }
+      privateNotes {
+        _id
+        noteTitle
+        noteText
+        createdAt
+      }
     }
-    password
     playerCampaigns {
       _id
+      campaignTitle
+      campaignDescription
+      campaignImage
+      createdAt
+      privateNotes {
+        _id
+        noteTitle
+        noteText
+        createdAt
+      }
+      publicNotes {
+        _id
+        noteTitle
+        noteText
+        createdAt
+      }
     }
-    username
   }
+}
 `;
 
 export const QUERY_CAMPAIGN = gql`
