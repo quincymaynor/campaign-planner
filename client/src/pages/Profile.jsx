@@ -15,7 +15,7 @@ const Profile = () => {
 
   const { loading, data, error } = useQuery(QUERY_ME);
 
-  const user = data?.user || {};
+  const user = data?.getMe || {};
   console.log('Loading:', loading);
   console.log('Error:', error);
   console.log('Data:', data);
@@ -24,8 +24,6 @@ const Profile = () => {
   const randomCampaignImage1 = getRandomCampaignImage();
   const randomCampaignImage2 = getRandomCampaignImage();
   const randomCampaignImage3 = getRandomCampaignImage();
-
-  
 
     // Check if the user is authenticated
     if (!AuthService.loggedIn()) {
