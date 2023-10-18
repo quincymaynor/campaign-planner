@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client'; // Import useQuery from Apollo Client
 import { QUERY_ME } from '../utils/queries'; // Import your QUERY_ME if it's not already imported
 import AuthService from '../utils/auth';
+import Tools from '../components/Tools';
 import CampaignList from '../components/CampaignList';
 
 const Home = () => {
@@ -16,20 +17,7 @@ const Home = () => {
   return (
     <main>
       <div className="dashboard">
-        <div className="menu-container">
-          <div className="menu">
-            <h2>Tools</h2>
-            <ul>
-              <li>
-                <Link to="/create-campaign">Create Campaign</Link>
-              </li>
-              <li>
-                <Link to="/create-note">Create Note</Link>
-              </li>
-              {/* Add more menu items as needed */}
-            </ul>
-          </div>
-        </div>
+        <Tools/>
         <div className="dashboard-container">
           <div className="text-center mt-3">
             <h1>Dashboard</h1>
@@ -47,11 +35,11 @@ const Home = () => {
                     <div>
                       <CampaignList
                         campaigns={gmCampaigns}
-                        title="GM Campaigns"
+                        title="My Campaigns"
                       />
                       <CampaignList
                         campaigns={playerCampaigns}
-                        title="Player Campaigns"
+                        title="Joined Campaigns"
                       />
                     </div>
                   </div>

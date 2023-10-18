@@ -1,11 +1,3 @@
-// import { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { useMutation } from '@apollo/client';
-
-// import { ADD_CAMPAIGN } from '../utils/mutations';
-// import { QUERY_ME } from '../utils/queries';
-
-// import Auth from '../utils/auth';
 import React from 'react';
 import Campaign from '../components/Campaign';
 
