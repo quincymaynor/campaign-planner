@@ -9,7 +9,7 @@ import Auth from '../utils/auth';
 const NoteForm = ({ thoughtId }) => {
   const [noteTitle, setNoteTitle] = useState('');
   const [noteText, setNoteText] = useState('');
-  const [notePublic, setNotePublic] = useState('false');
+  const [notePublic, setNotePublic] = useState('false'); // Assuming you want to use notePublic here
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addNote, { error }] = useMutation(ADD_NOTE);
@@ -18,9 +18,9 @@ const NoteForm = ({ thoughtId }) => {
     event.preventDefault();
 
     try {
-      const { data } = await addComment({
+      const { data } = await addNote({ // Fixed the function name here
         variables: {
-          campaignId,
+          campaignId: thoughtId, // Assuming thoughtId is the correct variable
           noteTitle,
           noteText,
           notePublic,
@@ -30,7 +30,7 @@ const NoteForm = ({ thoughtId }) => {
 
       setNoteText('');
       setNoteTitle('');
-      setPublic('');
+      setNotePublic('');
     } catch (err) {
       console.error(err);
     }
@@ -39,8 +39,8 @@ const NoteForm = ({ thoughtId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'commentText' && value.length <= 280) {
-      setCommentText(value);
+    if (name === 'noteText' && value.length <= 280) {
+      setNoteText(value); // Fixed variable name here
       setCharacterCount(value.length);
     }
   };
@@ -53,10 +53,10 @@ const NoteForm = ({ thoughtId }) => {
         <>
           <p
             className={`m-0 ${
-              characterCount === 100000 || error ? 'text-danger' : ''
+              characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            Character Count: {characterCount}/100000
+            Character Count: {characterCount}/280
             {error && <span className="ml-2">{error.message}</span>}
           </p>
           <form
@@ -65,9 +65,9 @@ const NoteForm = ({ thoughtId }) => {
           >
             <div className="col-12 col-lg-9">
               <textarea
-                name="commentText"
-                placeholder="Add your comment..."
-                value={commentText}
+                name="noteText" // Fixed name here
+                placeholder="Add your note..."
+                value={noteText} // Fixed value here
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}

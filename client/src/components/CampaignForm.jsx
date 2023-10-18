@@ -69,7 +69,7 @@ const CampaignForm = () => {
               <textarea
                 name=""
                 placeholder=""
-                value={thoughtText}
+                value={campaignDescription}
                 className=""
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
