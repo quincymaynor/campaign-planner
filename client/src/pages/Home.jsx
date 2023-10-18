@@ -6,9 +6,10 @@ import Campaign from '../components/Campaign';
 const Home = () => {
   const isLoggedIn = AuthService.loggedIn();
   const username = isLoggedIn ? AuthService.getProfile().authenticatedPerson.username : '';
-  const {loading, data} = useQuery(QUERY_ME)
+  const { loading, data } = useQuery(QUERY_ME)
 
-  const  = data?.thoughts || [];
+  const gmCampaigns = data?.gmCampaigns || [];
+  const playerCampaigns = data?.playerCampaigns || [];
 
   return (
     <main>
