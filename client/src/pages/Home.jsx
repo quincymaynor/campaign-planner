@@ -24,27 +24,20 @@ const Home = () => {
           </div>
           <div className="flex-row justify-center">
             <div className="col-12 col-md-10 mb-3 p-3">
-              {isLoggedIn ? (
-                <h3 className="mt-2 mb-2">Welcome home, {username}!</h3>
-              ) : (
-                <h2>Please log in or sign up to access this page.</h2>
-              )}
-              {isLoggedIn && (
-                <div>
-                  <div className="campaign-card-container">
-                    <div>
-                      <CampaignList
-                        campaigns={gmCampaigns}
-                        title="My Campaigns"
-                      />
-                      <CampaignList
-                        campaigns={playerCampaigns}
-                        title="Joined Campaigns"
-                      />
-                    </div>
+              <div>
+                <div className="campaign-card-container">
+                  <div>
+                    <CampaignList
+                      campaigns={gmCampaigns}
+                      title="Owned Campaigns"
+                    />
+                    <CampaignList
+                      campaigns={playerCampaigns}
+                      title="Joined Campaigns"
+                    />
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>

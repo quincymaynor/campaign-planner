@@ -32,39 +32,34 @@ const Campaign = () => {
     }
 
     return (
-    <main>
-      <div className="dashboard">
-        <Tools/>
-        
-      </div>
-      <div>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <div className="dashboard-container">
-                <div className="text-center mt-3">
-                    <h1>{campaign?.campaignTitle}</h1>
-                </div>
-                <div className="flex-row justify-center">
-                    <div className="col-12 col-md-10 mb-3 p-3">
-                        <div className="campaign-card-container">
+        <main>
+            <div className="dashboard">
+            <Tools/>
+                <div className="dashboard-container">
+                    <div className="text-center mt-3">
+                        <h1>{campaign?.campaignTitle}</h1>
+                    </div>
+                    <div className="flex-row justify-center">
+                        <div className="col-12 col-md-10 mb-3 p-3">
                             <div>
-                                <NoteList
-                                    notes={privateNotes}
-                                    title="My Private Notes"
-                                />
-                                <NoteList
-                                    notes={publicNotes}
-                                    title="My Public Notes"
-                                />
+                                <div className="campaign-card-container">
+                                    <div>
+                                        <NoteList
+                                            notes={privateNotes}
+                                            title="My Private Notes"
+                                        />
+                                        <NoteList
+                                            notes={publicNotes}
+                                            title="My Public Notes"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-          )}
-        </div>
-    </main>
+        </main>
     );
 };
 
