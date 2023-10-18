@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Landing from './pages/Landing';
+import CampaignForm from './components/CampaignForm';
+import NoteForm from './components/NoteForm';
 import Campaign from './pages/Campaign';
 
 const router = createBrowserRouter([
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: '/profile/:username', // Define the route with a username parameter
         element: <Profile />
+      },
+      {
+        path: '/campaign-form', // Define the route with a username parameter
+        element: <CampaignForm />
+      },
+      {
+        path: '/note-form', // Define the route with a username parameter
+        element: <NoteForm />
       },
       {
         path: '/campaign/:campaignId',
