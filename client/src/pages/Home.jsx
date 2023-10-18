@@ -10,13 +10,8 @@ const Home = () => {
   const username = isLoggedIn ? AuthService.getProfile().authenticatedPerson.username : '';
   const { data } = useQuery(QUERY_ME)
 
-  const user = data?.getMe || {};
   const gmCampaigns = data?.getMe.gmCampaigns || [];
   const playerCampaigns = data?.getMe.playerCampaigns || [];
-
-  console.log('Data:', data);
-  console.log('gmCampaigns', gmCampaigns);
-  console.log('user', user);
 
   return (
     <main>
