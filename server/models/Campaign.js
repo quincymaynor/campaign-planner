@@ -8,6 +8,7 @@ const campaignSchema = new Schema({
   },
   campaignDescription: {
     type: String,
+    maxlength: 280,
   },
   campaignImage: {
     type: String,

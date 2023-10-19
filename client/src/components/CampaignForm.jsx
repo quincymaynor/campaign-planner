@@ -86,7 +86,7 @@ const CampaignForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'campaignDescription' && value.length <= 500) {
+    if (name === 'campaignDescription' && value.length <= 280) {
       setCampaignDescription(value);
       setCharacterCount(value.length);
     }
@@ -131,7 +131,7 @@ const CampaignForm = () => {
       </div>
   
       <p className="character-count">
-        Character Count: {characterCount}/500
+        Character Count: {characterCount}/280
       </p>
   
       <div className="campaign-image-container">

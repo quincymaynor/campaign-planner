@@ -61,41 +61,29 @@ export const REMOVE_CAMPAIGN = gql`
 `;
 
 export const ADD_NOTE = gql`
-  # mutation AddNote($campaignId: ID!, $noteText: String!, $noteAuthor: String!, $noteTitle: String, $public: Boolean) {
-  #   addNote(campaignId: $campaignId, noteText: $noteText, noteAuthor: $noteAuthor, noteTitle: $noteTitle, public: $public) {
-  #     _id
-  #     privateNotes {
-  #       _id
-  #       noteTitle
-  #       noteText
-  #       createdAt
-  #       noteAuthor
-  #       campaignId {
-  #         _id
-  #       }
-  #       public
-  #     }
-  #     publicNotes {
-  #       _id
-  #       noteTitle
-  #       noteText
-  #       createdAt
-  #       noteAuthor
-  #       campaignId {
-  #         _id
-  #       }
-  #       public
-  #     }
-  #   }
-  # }
-  mutation addNote($campaignId: ID!, $noteTitle: String!, $noteText: String!, $public: Boolean, $noteAuthor: String!) {
-    addNote(campaignId: $campaignId, noteTitle: $noteTitle, noteText: $noteText, public: $public, noteAuthor: $noteAuthor) {
+  mutation AddNote($campaignId: ID!, $noteText: String!, $noteAuthor: String!, $noteTitle: String, $public: Boolean) {
+  addNote(campaignId: $campaignId, noteText: $noteText, noteAuthor: $noteAuthor, noteTitle: $noteTitle, public: $public) {
+    _id
+    privateNotes {
       _id
-      campaignId
       noteTitle
       noteText
+      createdAt
+      campaignId {
+        _id
+      }
       public
-      noteAuthor
+    }
+    publicNotes {
+      _id
+      noteTitle
+      noteText
+      createdAt
+      campaignId {
+        _id
+      }
+      public
     }
   }
+}
 `;
