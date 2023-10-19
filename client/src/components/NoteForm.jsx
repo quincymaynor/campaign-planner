@@ -23,7 +23,7 @@ const NoteForm = () => {
           Select Campaign
         </option>,
         ...user.gmCampaigns.map((campaign) => (
-          <option key={campaign.campaignId} value={campaign.campaignId}>
+          <option key={campaign._id} value={campaign._id}>
             {campaign.campaignTitle}
           </option>
         ))
@@ -45,7 +45,7 @@ const NoteForm = () => {
           campaignId: noteCampaign,
           noteTitle,
           noteText,
-          notePublic,
+          public: notePublic,
           noteAuthor: Auth.getProfile().authenticatedPerson.username,
         },
       });
@@ -84,35 +84,36 @@ const NoteForm = () => {
             <h4 className="card-header bg-dark text-light p-2">Create Note</h4>
             <div className="card-body">
               <form onSubmit={handleFormSubmit}>
+
                 <select
                   name="noteCampaign"
-                  id="noteCampaign"
-                  key="noteCampaign"
+                  // id="noteCampaign"
                   value={noteCampaign || ''} // Set a default empty string value
                   onChange={(e) => setNoteCampaign(e.target.value)}
                   className="form-input"
                 >
                   {campaignOptions}
                 </select>
+
                 <input
                   type="text"
                   name="noteTitle"
-                  id="noteTitle"
-                  key="noteTitle"
+                  // id="noteTitle"
                   value={noteTitle}
                   onChange={handleTitleChange}
                   className="form-input"
                   placeholder="Note Title"
-                />
+                ></input>
+
                 <textarea
                   name="noteText"
-                  id="noteText"
-                  key="noteText"
+                  // id="noteText"
                   value={noteText}
                   onChange={handleChange}
                   className="form-input"
                   placeholder="Note Text"
-                />
+                ></textarea>
+                
                 <div className="character-count">Character Count: {characterCount}/10000</div>
                 <div className="note-public-checkbox">
                   <label className="form-label">Make Note Public:</label>
