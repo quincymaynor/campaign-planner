@@ -159,10 +159,10 @@ const resolvers = {
     },
 
     // Mutation resolver for updating a campaign
-    updateCampaign: async (_parent, { campaignId, campaignTitle }) => {
+    updateCampaign: async (_parent, { campaignId, campaignTitle, campaignDescription, campaignImage }) => {
       const campaign = await Campaign.findOneAndUpdate(
         { _id: campaignId }, 
-        { campaignTitle }, 
+        { campaignTitle, campaignDescription, campaignImage }, 
         { new: true }
       );
 

@@ -63,21 +63,21 @@ const Profile = () => {
 
     <div className="profile-cards">
       <div className="profile-card" style={{
-          backgroundImage: `url(${randomCampaignImage1})`,
+          backgroundImage: `url(Campaign-Images/${randomCampaignImage1})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'}}>
         <p className="profile-card-title">Friends</p>
         <p className="profile-number">##</p>
       </div>
       <div className="profile-card" style={{
-          backgroundImage: `url(${randomCampaignImage2})`,
+          backgroundImage: `url(Campaign-Images/${randomCampaignImage2})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'}}>
       <p className="profile-card-title">Campaigns Created</p>
         <p className="profile-number">##</p>
       </div>
       <div className="profile-card" style={{
-          backgroundImage: `url(${randomCampaignImage3})`,
+          backgroundImage: `url(Campaign-Images/${randomCampaignImage3})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'}}>
       <p className="profile-card-title">Campaigns Joined</p>

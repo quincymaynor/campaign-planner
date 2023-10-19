@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {  } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { ADD_CAMPAIGN } from '../utils/mutations';
@@ -77,6 +77,7 @@ const CampaignForm = () => {
       setCampaignTitle('');
       setCampaignDescription('');
       setCampaignImage(selectedImage); // Reset the selected image
+
     } catch (err) {
       console.error(err);
     }
