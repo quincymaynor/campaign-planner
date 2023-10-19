@@ -87,6 +87,7 @@ const NoteForm = () => {
                 <select
                   name="noteCampaign"
                   id="noteCampaign"
+                  key="noteCampaign"
                   value={noteCampaign || ''} // Set a default empty string value
                   onChange={(e) => setNoteCampaign(e.target.value)}
                   className="form-input"
@@ -97,6 +98,7 @@ const NoteForm = () => {
                   type="text"
                   name="noteTitle"
                   id="noteTitle"
+                  key="noteTitle"
                   value={noteTitle}
                   onChange={handleTitleChange}
                   className="form-input"
@@ -105,6 +107,7 @@ const NoteForm = () => {
                 <textarea
                   name="noteText"
                   id="noteText"
+                  key="noteText"
                   value={noteText}
                   onChange={handleChange}
                   className="form-input"
