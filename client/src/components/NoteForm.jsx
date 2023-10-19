@@ -23,8 +23,8 @@ const NoteForm = () => {
           Select Campaign
         </option>,
         ...user.gmCampaigns.map((campaign) => (
-          <option key={campaign.id} value={campaign.id}>
-            {campaign.title}
+          <option key={campaign.campaignId} value={campaign.campaignId}>
+            {campaign.campaignTitle}
           </option>
         ))
       ]
