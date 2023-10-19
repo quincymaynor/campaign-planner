@@ -52,10 +52,8 @@ const CampaignUpdate = () => {
     setCampaignImage(selectedValue); // Update campaignImage state
   };
 
-//   const campaignTitle = campaign.campaignTitle
-//   const campaignDescription = campaign.campaignDescription
-  const [campaignTitle, setCampaignTitle] = useState('');
-  const [campaignDescription, setCampaignDescription] = useState('');
+  const [campaignTitle, setCampaignTitle] = useState(campaign.campaignTitle);
+  const [campaignDescription, setCampaignDescription] = useState(campaign.campaignDescription);
 
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -70,15 +68,7 @@ const CampaignUpdate = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-    //   const formData = {
-    //     campaignTitle,
-    //     campaignDescription,
-    //     campaignAuthor: Auth.getProfile().authenticatedPerson.username,
-    //     campaignImage, // Include campaignImage in the data
-    //   };
-  
-    //   console.log('Form Data:', formData); // Add this line to log the form data
-  
+
       const { data } = updateCampaign({
         variables: {
             campaignId: campaignId,
