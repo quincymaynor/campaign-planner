@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { ADD_NOTE } from '../utils/mutations';
-import Tools from '../components/Tools';
+import Tools from './Tools';
 import Auth from '../utils/auth';
 
 const NoteForm = () => {

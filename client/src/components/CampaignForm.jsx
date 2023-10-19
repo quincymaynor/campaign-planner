@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_CAMPAIGN } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 
-import Tools from '../components/Tools';
+import Tools from './Tools';
 
 import Auth from '../utils/auth';
 
@@ -51,10 +51,10 @@ const CampaignForm = () => {
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addCampaign, { error }] = useMutation(ADD_CAMPAIGN, {
-    // refetchQueries: [
-    //   QUERY_ME,
-    //   'GetMe'
-    // ]
+    refetchQueries: [
+      QUERY_ME,
+      'GetMe'
+    ]
   });
 
 

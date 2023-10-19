@@ -1,11 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_CAMPAIGN } from '../utils/queries';
 import { UPDATE_CAMPAIGN, REMOVE_CAMPAIGN } from '../utils/mutations';
 import AuthService from '../utils/auth';
 import Tools from '../components/Tools';
 import NoteList from '../components/NoteList';
+import CampaignForm from '../components/CampaignForm'
 
 const Campaign = () => {
     // Get campaign id from the URL
@@ -79,7 +80,7 @@ const Campaign = () => {
                   <h1 className="no-margin-bottom">{campaign?.campaignTitle}</h1>
                   {campaignCreatedOn ? (
                     <small className="campaign-created no-margin-top">
-                      Campaign created on: {campaignCreatedOn}
+                      Created On: {campaignCreatedOn}
                     </small>
                   ) : (
                     <small className="campaign-created no-margin-top">No Campaign Creation Date</small>
@@ -111,7 +112,9 @@ const Campaign = () => {
                     </div>
                   </div>
                   <div className="campaign-buttons">
-                    <button className="edit-button">Edit Campaign</button>
+                    <button className="edit-button">
+                     <Link to={`/update-campaign/${campaign._id}`}>Edit Campaign</Link>
+                    </button>
                     <button className="delete-button" onClick={handleRemove}>Delete Campaign</button>
                   </div>
                 </div>

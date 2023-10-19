@@ -41,11 +41,15 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
-        path: '/create-campaign', // Define the route with a username parameter
+        path: '/create-campaign',
         element: <CampaignForm />
       },
       {
-        path: '/create-note', // Define the route with a username parameter
+        path: '/update-campaign/:campaignId',
+        element: <CampaignForm />
+      },
+      {
+        path: '/create-note',
         element: <NoteForm />
       },
       {
