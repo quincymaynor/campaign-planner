@@ -2,7 +2,7 @@ import React from 'react';
 
 const CampaignCard = ({ imageUrl, link, title, description }) => {
   const cardStyle = {
-    backgroundImage: `url('${imageUrl}')`,
+    backgroundImage: `url('Campaign-Images/${imageUrl}')`,
   };
 
   return (

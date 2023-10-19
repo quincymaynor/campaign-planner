@@ -101,7 +101,6 @@ const resolvers = {
     },
     
     // Mutation resolver for creating a campaign
-    // can I make this and if else for gm/player campaign or do they need to be separate?
     addCampaign: async (_parent, { campaignTitle, campaignDescription, campaignImage }, context) => {
       if (context.user) {
         const campaign = await Campaign.create({
