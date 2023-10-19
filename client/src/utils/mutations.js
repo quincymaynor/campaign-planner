@@ -25,13 +25,14 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_CAMPAIGN = gql`
-  mutation AddCampaign($campaignTitle: String!, $campaignAuthor: String!, $createdAt: String!, $campaignDescription: String, $campaignImage: String) {
+  mutation AddCampaign($campaignTitle: String!, $campaignAuthor: String!, $createdAt: String, $campaignDescription: String, $campaignImage: String) {
     addCampaign(campaignTitle: $campaignTitle, campaignAuthor: $campaignAuthor, createdAt: $createdAt, campaignDescription: $campaignDescription, campaignImage: $campaignImage) {
       _id
       campaignTitle
       campaignDescription
       campaignImage
       campaignAuthor
+      createdAt
     }
   }
 `;

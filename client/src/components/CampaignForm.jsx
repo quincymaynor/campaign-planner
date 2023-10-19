@@ -49,29 +49,12 @@ const CampaignForm = () => {
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addCampaign, { error }] = useMutation(ADD_CAMPAIGN, {
-    refetchQueries: [
-      QUERY_ME,
-      'me'
-    ]
+    // refetchQueries: [
+    //   QUERY_ME,
+    //   'GetMe'
+    // ]
   });
 
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const { data } = await addCampaign({
-  //       variables: {
-  //         campaignTitle,
-  //         campaignDescription,
-  //         campaignAuthor: Auth.getProfile().authenticatedPerson.username
-  //       },
-  //     });
-
-  //     setCampaignTitle('');
-  //     setCampaignDescription('');
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -86,7 +69,7 @@ const CampaignForm = () => {
       console.log('Form Data:', formData); // Add this line to log the form data
   
       const { data } = addCampaign({
-        variables: { ...formData },
+        variables: formData,
       });
   
       setCampaignTitle('');
