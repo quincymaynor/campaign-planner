@@ -42,19 +42,19 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
-        path: '/create-campaign',
+        path: '/create-campaign', // add campaign page
         element: <CampaignAdd />
       },
       {
-        path: '/update-campaign/:campaignId',
+        path: '/update-campaign/:campaignId', // update campaign page
         element: <CampaignUpdate />
       },
       {
-        path: '/create-note',
+        path: '/create-note', // create note page
         element: <NoteForm />
       },
       {
-        path: '/campaign/:campaignId',
+        path: '/campaign/:campaignId', // single campaign page
         element: <Campaign />
       },
       {

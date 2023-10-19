@@ -53,6 +53,8 @@ const NoteForm = () => {
       setNoteText('');
       setNoteTitle('');
       setNotePublic(false);
+
+      window.location.assign(`/campaign/${noteCampaign}`);
     } catch (err) {
       console.error(err);
     }

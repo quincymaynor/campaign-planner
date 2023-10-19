@@ -83,6 +83,7 @@ const CampaignUpdate = () => {
       setCampaignDescription('');
       setCampaignImage(selectedImage); // Reset the selected image
 
+      window.location.assign('/home');
     } catch (err) {
       console.error(err);
     }

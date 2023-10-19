@@ -26,6 +26,7 @@ const Campaign = () => {
           },
         });
     
+      window.location.assign('/home');
       } catch (err) {
         console.error(err);
       }
