@@ -9,7 +9,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Landing from './pages/Landing';
-import CampaignForm from './components/CampaignForm';
+import CampaignAdd from './pages/CampaignAdd';
+import CampaignUpdate from './pages/CampaignUpdate';
 import NoteForm from './components/NoteForm';
 import Campaign from './pages/Campaign';
 
@@ -42,11 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/create-campaign',
-        element: <CampaignForm />
+        element: <CampaignAdd />
       },
       {
         path: '/update-campaign/:campaignId',
-        element: <CampaignForm />
+        element: <CampaignUpdate />
       },
       {
         path: '/create-note',

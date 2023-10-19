@@ -6,7 +6,6 @@ import { UPDATE_CAMPAIGN, REMOVE_CAMPAIGN } from '../utils/mutations';
 import AuthService from '../utils/auth';
 import Tools from '../components/Tools';
 import NoteList from '../components/NoteList';
-import CampaignForm from '../components/CampaignForm'
 
 const Campaign = () => {
     // Get campaign id from the URL
@@ -17,7 +16,6 @@ const Campaign = () => {
     });
     
     const [removeCampaign] = useMutation(REMOVE_CAMPAIGN, {});
-    // const [updateCampaign] = useMutation(UPDATE_CAMPAIGN, {});
     
     const handleRemove = async (event) => {
       event.preventDefault();
@@ -32,20 +30,6 @@ const Campaign = () => {
         console.error(err);
       }
     };
-
-    // const handleUpdate = async (event) => {
-    //   event.preventDefault();
-    //   try {
-    //     const { data } = updateCampaign({
-    //       variables: {
-    //         campaignId: campaignId
-    //       },
-    //     });
-    
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
     
     const campaign = data?.getCampaign || {};
     const privateNotes = campaign.privateNotes || [];
@@ -112,10 +96,12 @@ const Campaign = () => {
                     </div>
                   </div>
                   <div className="campaign-buttons">
-                    <button className="edit-button">
-                     <Link to={`/update-campaign/${campaign._id}`}>Edit Campaign</Link>
+                    <Link to={`/update-campaign/${campaignId}`} className="edit-button">
+                      Edit Campaign
+                    </Link>
+                    <button className="delete-button" onClick={handleRemove}>
+                      Delete Campaign
                     </button>
-                    <button className="delete-button" onClick={handleRemove}>Delete Campaign</button>
                   </div>
                 </div>
               </div>

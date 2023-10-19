@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import {  } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useParams } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/client';
 
-import { ADD_CAMPAIGN, UPDATE_CAMPAIGN } from '../utils/mutations';
-import { QUERY_ME } from '../utils/queries';
+import { UPDATE_CAMPAIGN } from '../utils/mutations';
+import { QUERY_ME, QUERY_CAMPAIGN } from '../utils/queries';
 
-import Tools from './Tools';
+import Tools from '../components/Tools';
 import Auth from '../utils/auth';
 
-const CampaignForm = () => {
+const CampaignUpdate = () => {
 
   const campaignImages = [
     'Apocalypse-Setting-1.png',
@@ -36,6 +36,14 @@ const CampaignForm = () => {
     'Western-Setting-1.png'
   ];
 
+  const { campaignId } = useParams();
+
+  const { _loading, data, _error } = useQuery(QUERY_CAMPAIGN, {
+      variables: { campaignId: campaignId },
+  });
+
+  const campaign = data?.getCampaign || {};
+  
   const [selectedImage, setSelectedImage] = useState(campaignImages[0]);
   const [campaignImage, setCampaignImage] = useState(selectedImage); // New state for campaignImage
   const handleImageChange = (event) => {
@@ -44,33 +52,41 @@ const CampaignForm = () => {
     setCampaignImage(selectedValue); // Update campaignImage state
   };
 
+//   const campaignTitle = campaign.campaignTitle
+//   const campaignDescription = campaign.campaignDescription
   const [campaignTitle, setCampaignTitle] = useState('');
   const [campaignDescription, setCampaignDescription] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addCampaign, { error }] = useMutation(ADD_CAMPAIGN, {
-    refetchQueries: [
-      QUERY_ME,
-      'GetMe'
-    ]
+  const [updateCampaign, { error }] = useMutation(UPDATE_CAMPAIGN, {
+    // refetchQueries: [
+    //   QUERY_ME,
+    //   'GetMe'
+    // ]
   });
 
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const formData = {
-        campaignTitle,
-        campaignDescription,
-        campaignAuthor: Auth.getProfile().authenticatedPerson.username,
-        campaignImage, // Include campaignImage in the data
-      };
+    //   const formData = {
+    //     campaignTitle,
+    //     campaignDescription,
+    //     campaignAuthor: Auth.getProfile().authenticatedPerson.username,
+    //     campaignImage, // Include campaignImage in the data
+    //   };
   
-      console.log('Form Data:', formData); // Add this line to log the form data
+    //   console.log('Form Data:', formData); // Add this line to log the form data
   
-      const { data } = addCampaign({
-        variables: formData,
+      const { data } = updateCampaign({
+        variables: {
+            campaignId: campaignId,
+            campaignTitle,
+            campaignDescription,
+            campaignAuthor: Auth.getProfile().authenticatedPerson.username,
+            campaignImage, // Include campaignImage in the data
+        },
       });
   
       setCampaignTitle('');
@@ -81,6 +97,20 @@ const CampaignForm = () => {
       console.error(err);
     }
   };
+  
+    // const handleUpdate = async (event) => {
+    //   event.preventDefault();
+    //   try {
+    //     const { data } = updateCampaign({
+    //       variables: {
+    //         campaignId: campaignId
+    //       },
+    //     });
+    
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -111,7 +141,7 @@ const CampaignForm = () => {
                     type="text"
                     name="campaignTitle"
                     placeholder="Title"
-                    defaultValue="Title"
+                    defaultValue={campaign.campaignTitle}
                     onChange={handleTitleChange}
                     className="campaign-image-selector"
                   ></input>
@@ -120,7 +150,7 @@ const CampaignForm = () => {
                   <textarea
                     type="text"
                     name="campaignDescription"
-                    placeholder="Description"
+                    placeholder={campaign.campaignDescription}
                     value={campaignDescription}
                     className="campaign-image-selector"
                     style={{ lineHeight: '1.5', resize: 'vertical' }}
@@ -135,7 +165,7 @@ const CampaignForm = () => {
           
               <div className="campaign-image-container">
                 <h3 className="campaign-form-header">Select Campaign Image</h3>
-                <select className="campaign-image-selector" value={selectedImage} onChange={handleImageChange}>
+                <select className="campaign-image-selector" value={campaign.campaignImage} onChange={handleImageChange}>
                   {campaignImages.map((imageName) => (
                     <option key={imageName} value={imageName}>
                       {imageName}
@@ -148,7 +178,7 @@ const CampaignForm = () => {
               </div>
           
               <button className="campaign-add-button" type="submit">
-                Add Campaign
+                Edit Campaign
               </button>
             </form>
           </div>
@@ -158,4 +188,4 @@ const CampaignForm = () => {
   );
 };
 
-export default CampaignForm;
+export default CampaignUpdate;

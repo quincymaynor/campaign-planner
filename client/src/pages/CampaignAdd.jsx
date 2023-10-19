@@ -2,13 +2,13 @@ import { useState } from 'react';
 import {  } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_CAMPAIGN, UPDATE_CAMPAIGN } from '../utils/mutations';
+import { ADD_CAMPAIGN } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 
-import Tools from './Tools';
+import Tools from '../components/Tools';
 import Auth from '../utils/auth';
 
-const CampaignForm = () => {
+const CampaignAdd = () => {
 
   const campaignImages = [
     'Apocalypse-Setting-1.png',
@@ -158,4 +158,4 @@ const CampaignForm = () => {
   );
 };
 
-export default CampaignForm;
+export default CampaignAdd;
