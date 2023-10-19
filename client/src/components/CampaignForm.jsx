@@ -5,6 +5,8 @@ import { useMutation } from '@apollo/client';
 import { ADD_CAMPAIGN } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 
+import Tools from '../components/Tools';
+
 import Auth from '../utils/auth';
 
 const CampaignForm = () => {
@@ -94,6 +96,10 @@ const CampaignForm = () => {
   };
 
   return (
+    <main>
+    <div className="dashboard">
+    <Tools/>
+        <div className="dashboard-container">
     <div className="campaign-form-container">
     <h3 className="campaign-form-header">Campaign Form</h3>
   
@@ -146,6 +152,9 @@ const CampaignForm = () => {
       </button>
     </form>
   </div>
+  </div>
+            </div>
+        </main>
   );
 };
 

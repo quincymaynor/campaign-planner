@@ -579,7 +579,6 @@ footer {
   margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
-  background-color: #fff; /* Background color for the form container */
 }
 
 .campaign-form-header {
@@ -646,4 +645,8 @@ footer {
 .character-count {
   margin-top:0px;
   margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Young Serif', serif;
 }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { ADD_NOTE } from '../utils/mutations';
-
+import Tools from '../components/Tools';
 import Auth from '../utils/auth';
 
 const NoteForm = () => {
@@ -16,22 +16,23 @@ const NoteForm = () => {
   const { loading, data } = useQuery(QUERY_ME);
   const user = data?.getMe || {};
 
-  const campaignOptions = user.gmCampaigns && user.gmCampaigns.length > 0
-  ? [
+  const campaignOptions =
+  user.gmCampaigns && Array.isArray(user.gmCampaigns) && user.gmCampaigns.length > 0
+    ? [
+        <option key="default" value="">
+          Select Campaign
+        </option>,
+        ...user.gmCampaigns.map((campaign) => (
+          <option key={campaign.id} value={campaign.id}>
+            {campaign.title}
+          </option>
+        ))
+      ]
+    : (
       <option key="default" value="">
         Select Campaign
-      </option>,
-      ...user.campaigns.map((campaign) => (
-        <option key={campaign.id} value={campaign.id}>
-          {campaign.title}
-        </option>
-      ))
-    ]
-  : (
-    <option key="default" value="">
-      Select Campaign
-    </option>
-  );
+      </option>
+    );
 
   const [addNote, { error }] = useMutation(ADD_NOTE);
 
@@ -70,7 +71,15 @@ const NoteForm = () => {
     setNotePublic(!notePublic);
   };
 
+  const handleTitleChange = (event) => {
+    setNoteTitle(event.target.value);
+  };
+
   return (
+    <main>
+    <div className="dashboard">
+    <Tools/>
+        <div className="dashboard-container">
     <div className="card">
       <h4 className="card-header bg-dark text-light p-2">Create Note</h4>
       <div className="card-body">
@@ -89,7 +98,7 @@ const NoteForm = () => {
             name="noteTitle"
             id="noteTitle"
             value={noteTitle}
-            onChange={handleChange}
+            onChange={handleTitleChange}
             className="form-input"
             placeholder="Note Title"
           />
@@ -134,6 +143,9 @@ const NoteForm = () => {
         )}
       </div>
     </div>
+    </div>
+            </div>
+        </main>
   );
 };
 

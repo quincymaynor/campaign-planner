@@ -1,9 +1,23 @@
 import React from 'react';
+import { getRandomDarkColor } from '../utils/colorPicker'; // Import the color picker util
 
 const NoteCard = ({ imageUrl, link, title, description }) => {
-  const cardStyle = {
+
+  let cardStyle;
+  if (imageUrl === undefined) {
+  cardStyle = {
+      backgroundColor: getRandomDarkColor(),
+    };
+  }
+  else {
+  cardStyle = {
     backgroundImage: `url('${imageUrl}')`,
   };
+
+}
+
+
+console.log(cardStyle);
 
   return (
     <div className="campaign-cards-container">
