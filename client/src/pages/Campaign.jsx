@@ -1,19 +1,51 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_CAMPAIGN } from '../utils/queries';
+import { UPDATE_CAMPAIGN, REMOVE_CAMPAIGN } from '../utils/mutations';
 import AuthService from '../utils/auth';
 import Tools from '../components/Tools';
 import NoteList from '../components/NoteList';
 
 const Campaign = () => {
     // Get campaign id from the URL
-    let { campaignId } = useParams();
+    const { campaignId } = useParams();
 
-    const { loading, data, error } = useQuery(QUERY_CAMPAIGN, {
+    const { _loading, data, _error } = useQuery(QUERY_CAMPAIGN, {
         variables: { campaignId: campaignId },
     });
+    
+    const [removeCampaign] = useMutation(REMOVE_CAMPAIGN, {});
+    // const [updateCampaign] = useMutation(UPDATE_CAMPAIGN, {});
+    
+    const handleRemove = async (event) => {
+      event.preventDefault();
+      try {
+        const { data } = removeCampaign({
+          variables: {
+            campaignId: campaignId
+          },
+        });
+    
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
+    // const handleUpdate = async (event) => {
+    //   event.preventDefault();
+    //   try {
+    //     const { data } = updateCampaign({
+    //       variables: {
+    //         campaignId: campaignId
+    //       },
+    //     });
+    
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // };
+    
     const campaign = data?.getCampaign || {};
     const privateNotes = campaign.privateNotes || [];
     const publicNotes = campaign.publicNotes || [];
@@ -80,7 +112,7 @@ const Campaign = () => {
                   </div>
                   <div className="campaign-buttons">
                     <button className="edit-button">Edit Campaign</button>
-                    <button className="delete-button">Delete Campaign</button>
+                    <button className="delete-button" onClick={handleRemove}>Delete Campaign</button>
                   </div>
                 </div>
               </div>
