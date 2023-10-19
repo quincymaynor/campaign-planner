@@ -48,31 +48,13 @@ const CampaignForm = () => {
 
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addCampaign, { error }] = useMutation
-    (ADD_CAMPAIGN, {
-      refetchQueries: [
-        QUERY_ME,
-        'me'
-      ]
-    });
+  const [addCampaign, { error }] = useMutation(ADD_CAMPAIGN, {
+    // refetchQueries: [
+    //   QUERY_ME,
+    //   'GetMe'
+    // ]
+  });
 
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const { data } = await addCampaign({
-  //       variables: {
-  //         campaignTitle,
-  //         campaignDescription,
-  //         campaignAuthor: Auth.getProfile().authenticatedPerson.username
-  //       },
-  //     });
-
-  //     setCampaignTitle('');
-  //     setCampaignDescription('');
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -86,7 +68,7 @@ const CampaignForm = () => {
   
       console.log('Form Data:', formData); // Add this line to log the form data
   
-      const { data } = await addCampaign({
+      const { data } = addCampaign({
         variables: formData,
       });
   
@@ -146,18 +128,18 @@ const CampaignForm = () => {
       </p>
   
       <div className="campaign-image-container">
-      <h3 className="campaign-form-header">Select Campaign Image</h3>
-  <select className="campaign-image-selector" value={selectedImage} onChange={handleImageChange}>
-    {campaignImages.map((imageName) => (
-      <option key={imageName} value={imageName}>
-        {imageName}
-      </option>
-    ))}
-  </select>
-  <div className="campaign-image-preview">
-    <img className="campaign-image" src={`/Campaign-Images/${selectedImage}`} alt="Selected Campaign Image" />
-  </div>
-</div>
+        <h3 className="campaign-form-header">Select Campaign Image</h3>
+        <select className="campaign-image-selector" value={selectedImage} onChange={handleImageChange}>
+          {campaignImages.map((imageName) => (
+            <option key={imageName} value={imageName}>
+              {imageName}
+            </option>
+          ))}
+        </select>
+        <div className="campaign-image-preview">
+          <img className="campaign-image" src={`/Campaign-Images/${selectedImage}`} alt="Selected Campaign Image" />
+        </div>
+      </div>
   
       <button className="campaign-add-button" type="submit">
         Add Campaign

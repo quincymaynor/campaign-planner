@@ -13,7 +13,8 @@ const NoteCard = ({ imageUrl, link, title, description }) => {
             <div className="campaign-card-front" style={cardStyle}>
               <div className="campaign-title">{title}</div>
             </div>
-                <div className="campaign-card-back" style={cardStyle}>
+              <div className="campaign-card-back" style={cardStyle}>
+              <div className="campaign-description">{description}</div>
             </div>
           </div>
         </div>
