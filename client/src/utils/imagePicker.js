@@ -44,5 +44,5 @@ export function getRandomCampaignImage() {
   usedImageIndices.add(randomIndex);
 
   // Return the filename directly
-  return `Campaign-Images/${campaignImages[randomIndex]}`;
+  return `${campaignImages[randomIndex]}`;
 }
