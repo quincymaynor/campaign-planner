@@ -86,7 +86,7 @@ const CampaignForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'campaignDescription' && value.length <= 500) {
+    if (name === 'campaignDescription' && value.length <= 280) {
       setCampaignDescription(value);
       setCharacterCount(value.length);
     }
@@ -98,64 +98,64 @@ const CampaignForm = () => {
 
   return (
     <main>
-    <div className="dashboard">
-    <Tools/>
+      <div className="dashboard">
+      <Tools/>
         <div className="dashboard-container">
-    <div className="campaign-form-container">
-    <h3 className="campaign-form-header">Campaign Form</h3>
-  
-    <form onSubmit={handleFormSubmit}>
-      <div className="campaign-form-group">
-        <div className="campaign-title-description-container">
-          <label>Campaign Title</label>
-          <input
-            type="text"
-            name="campaignTitle"
-            placeholder="Title"
-            defaultValue="Title"
-            onChange={handleTitleChange}
-            className="campaign-image-selector"
-          ></input>
-  
-          <label>Campaign Description</label>
-          <textarea
-            type="text"
-            name="campaignDescription"
-            placeholder="Description"
-            value={campaignDescription}
-            className="campaign-image-selector"
-            style={{ lineHeight: '1.5', resize: 'vertical' }}
-            onChange={handleChange}
-          ></textarea>
+          <div className="campaign-form-container">
+            <h3 className="campaign-form-header">Campaign Form</h3>
+          
+            <form onSubmit={handleFormSubmit}>
+              <div className="campaign-form-group">
+                <div className="campaign-title-description-container">
+                  <label>Campaign Title</label>
+                  <input
+                    type="text"
+                    name="campaignTitle"
+                    placeholder="Title"
+                    defaultValue="Title"
+                    onChange={handleTitleChange}
+                    className="campaign-image-selector"
+                  ></input>
+          
+                  <label>Campaign Description</label>
+                  <textarea
+                    type="text"
+                    name="campaignDescription"
+                    placeholder="Description"
+                    value={campaignDescription}
+                    className="campaign-image-selector"
+                    style={{ lineHeight: '1.5', resize: 'vertical' }}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+              </div>
+          
+              <p className="character-count">
+                Character Count: {characterCount}/280
+              </p>
+          
+              <div className="campaign-image-container">
+                <h3 className="campaign-form-header">Select Campaign Image</h3>
+                <select className="campaign-image-selector" value={selectedImage} onChange={handleImageChange}>
+                  {campaignImages.map((imageName) => (
+                    <option key={imageName} value={imageName}>
+                      {imageName}
+                    </option>
+                  ))}
+                </select>
+                <div className="campaign-image-preview">
+                  <img className="campaign-image" src={`/Campaign-Images/${selectedImage}`} alt="Selected Campaign Image" />
+                </div>
+              </div>
+          
+              <button className="campaign-add-button" type="submit">
+                Add Campaign
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-  
-      <p className="character-count">
-        Character Count: {characterCount}/500
-      </p>
-  
-      <div className="campaign-image-container">
-        <h3 className="campaign-form-header">Select Campaign Image</h3>
-        <select className="campaign-image-selector" value={selectedImage} onChange={handleImageChange}>
-          {campaignImages.map((imageName) => (
-            <option key={imageName} value={imageName}>
-              {imageName}
-            </option>
-          ))}
-        </select>
-        <div className="campaign-image-preview">
-          <img className="campaign-image" src={`/Campaign-Images/${selectedImage}`} alt="Selected Campaign Image" />
-        </div>
-      </div>
-  
-      <button className="campaign-add-button" type="submit">
-        Add Campaign
-      </button>
-    </form>
-  </div>
-  </div>
-            </div>
-        </main>
+    </main>
   );
 };
 

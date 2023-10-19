@@ -23,8 +23,8 @@ const NoteForm = () => {
           Select Campaign
         </option>,
         ...user.gmCampaigns.map((campaign) => (
-          <option key={campaign.id} value={campaign.id}>
-            {campaign.title}
+          <option key={campaign._id} value={campaign._id}>
+            {campaign.campaignTitle}
           </option>
         ))
       ]
@@ -45,7 +45,7 @@ const NoteForm = () => {
           campaignId: noteCampaign,
           noteTitle,
           noteText,
-          notePublic,
+          public: notePublic,
           noteAuthor: Auth.getProfile().authenticatedPerson.username,
         },
       });
@@ -61,7 +61,7 @@ const NoteForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'noteText' && value.length <= 280) {
+    if (name === 'noteText' && value.length <= 10000) {
       setNoteText(value);
       setCharacterCount(value.length);
     }
@@ -77,75 +77,79 @@ const NoteForm = () => {
 
   return (
     <main>
-    <div className="dashboard">
-    <Tools/>
+      <div className="dashboard">
+        <Tools/>
         <div className="dashboard-container">
-    <div className="card">
-      <h4 className="card-header bg-dark text-light p-2">Create Note</h4>
-      <div className="card-body">
-        <form onSubmit={handleFormSubmit}>
-        <select
-        name="noteCampaign"
-        id="noteCampaign"
-        value={noteCampaign || ''} // Set a default empty string value
-        onChange={(e) => setNoteCampaign(e.target.value)}
-       className="form-input"
-      >
-        {campaignOptions}
-</select>
-          <input
-            type="text"
-            name="noteTitle"
-            id="noteTitle"
-            value={noteTitle}
-            onChange={handleTitleChange}
-            className="form-input"
-            placeholder="Note Title"
-          />
-          <textarea
-            name="noteText"
-            id="noteText"
-            value={noteText}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Note Text"
-          />
-          <div className="character-count">Character Count: {characterCount}/280</div>
-          <div className="note-public-checkbox">
-            <label className="form-label">Make Note Public:</label>
-            <input
-              type="checkbox"
-              name="notePublic"
-              checked={notePublic}
-              onChange={toggleNotePublic}
-            />
-          </div>
-          {Auth.loggedIn() ? (
-            <button onClick={handleFormSubmit} className="btn btn-block btn-primary">
-              Add Note
-            </button>
-          ) : (
-            <p>
-              You need to be logged in to write a note. Please{' '}
-              <Link to="/login" className="note-form-link">
-                login
-              </Link>{' '}
-              or{' '}
-              <Link to="/signup" className="note-form-link">
-                signup
-              </Link>
-              .
-            </p>
-          )}
-        </form>
-        {error && (
-          <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-        )}
-      </div>
-    </div>
-    </div>
+          <div className="card">
+            <h4 className="card-header bg-dark text-light p-2">Create Note</h4>
+            <div className="card-body">
+              <form onSubmit={handleFormSubmit}>
+
+                <select
+                  name="noteCampaign"
+                  // id="noteCampaign"
+                  value={noteCampaign || ''} // Set a default empty string value
+                  onChange={(e) => setNoteCampaign(e.target.value)}
+                  className="form-input"
+                >
+                  {campaignOptions}
+                </select>
+
+                <input
+                  type="text"
+                  name="noteTitle"
+                  // id="noteTitle"
+                  value={noteTitle}
+                  onChange={handleTitleChange}
+                  className="form-input"
+                  placeholder="Note Title"
+                ></input>
+
+                <textarea
+                  name="noteText"
+                  // id="noteText"
+                  value={noteText}
+                  onChange={handleChange}
+                  className="form-input"
+                  placeholder="Note Text"
+                ></textarea>
+                
+                <div className="character-count">Character Count: {characterCount}/10000</div>
+                <div className="note-public-checkbox">
+                  <label className="form-label">Make Note Public:</label>
+                  <input
+                    type="checkbox"
+                    name="notePublic"
+                    checked={notePublic}
+                    onChange={toggleNotePublic}
+                  />
+                </div>
+                {Auth.loggedIn() ? (
+                  <button onClick={handleFormSubmit} className="btn btn-block btn-primary">
+                    Add Note
+                  </button>
+                ) : (
+                  <p>
+                    You need to be logged in to write a note. Please{' '}
+                    <Link to="/login" className="note-form-link">
+                      login
+                    </Link>{' '}
+                    or{' '}
+                    <Link to="/signup" className="note-form-link">
+                      signup
+                    </Link>
+                    .
+                  </p>
+                )}
+              </form>
+              {error && (
+                <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
+              )}
             </div>
-        </main>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 
