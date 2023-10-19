@@ -1,5 +1,5 @@
 import React from 'react';
-import Campaign from '../components/Campaign';
+import CampaignCard from './CampaignCard';
 
 const CampaignList = ({ campaigns, title }) => {
 
@@ -7,20 +7,24 @@ const CampaignList = ({ campaigns, title }) => {
       return <h3>No {title} Yet</h3>;
     } else {
         return (
+          <div>
+            <div className="">
+              <h1>{title}</h1>
+            </div>
             <div className="row">
               {campaigns.map((campaign, index) => (
-
-                  <Campaign
-                      key={index}
-                      link={`/campaign/${campaign._id}`}
-                      imageUrl={campaign.campaignImage}
-                      title={campaign.campaignTitle}
-                      description={campaign.campaignDescription}
-                  >
+                <CampaignCard
+                    key={index}
+                    link={`/campaign/${campaign._id}`}
+                    imageUrl={campaign.campaignImage}
+                    title={campaign.campaignTitle}
+                    description={campaign.campaignDescription}
+                >
                 {console.log(campaign)}
-                </Campaign>
+                </CampaignCard>
               ))}
             </div>
+          </div>
           );
     }
   };

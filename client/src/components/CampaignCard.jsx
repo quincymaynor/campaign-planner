@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Campaign = ({ imageUrl, link, title, description }) => {
+const CampaignCard = ({ imageUrl, link, title, description }) => {
   const cardStyle = {
     backgroundImage: `url('${imageUrl}')`,
   };
@@ -23,4 +23,4 @@ const Campaign = ({ imageUrl, link, title, description }) => {
   );
 };
 
-export default Campaign;
+export default CampaignCard;

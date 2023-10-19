@@ -1,5 +1,5 @@
 import React from 'react';
-import Campaign from '../components/Campaign';
+import CampaignCard from '../components/CampaignCard';
 import { getRandomCampaignImage } from '../utils/imagePicker';
 
 const Landing = () => {
@@ -28,7 +28,7 @@ const Landing = () => {
         <h2>Examples</h2>
         <div className="campaigns">
           {campaigns.map((campaign, index) => (
-            <Campaign
+            <CampaignCard
               key={index}
               imageUrl={campaign.imageUrl}
               title={campaign.title}
