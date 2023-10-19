@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { ADD_NOTE } from '../utils/mutations';
-
+import Tools from '../components/Tools';
 import Auth from '../utils/auth';
 
 const NoteForm = () => {
@@ -71,6 +71,10 @@ const NoteForm = () => {
   };
 
   return (
+    <main>
+    <div className="dashboard">
+    <Tools/>
+        <div className="dashboard-container">
     <div className="card">
       <h4 className="card-header bg-dark text-light p-2">Create Note</h4>
       <div className="card-body">
@@ -134,6 +138,9 @@ const NoteForm = () => {
         )}
       </div>
     </div>
+    </div>
+            </div>
+        </main>
   );
 };
 
