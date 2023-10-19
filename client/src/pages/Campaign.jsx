@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_CAMPAIGN } from '../utils/queries';
 import { UPDATE_CAMPAIGN, REMOVE_CAMPAIGN } from '../utils/mutations';
@@ -16,7 +16,6 @@ const Campaign = () => {
     });
     
     const [removeCampaign] = useMutation(REMOVE_CAMPAIGN, {});
-    // const [updateCampaign] = useMutation(UPDATE_CAMPAIGN, {});
     
     const handleRemove = async (event) => {
       event.preventDefault();
@@ -27,24 +26,11 @@ const Campaign = () => {
           },
         });
     
+      window.location.assign('/home');
       } catch (err) {
         console.error(err);
       }
     };
-
-    // const handleUpdate = async (event) => {
-    //   event.preventDefault();
-    //   try {
-    //     const { data } = updateCampaign({
-    //       variables: {
-    //         campaignId: campaignId
-    //       },
-    //     });
-    
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
     
     const campaign = data?.getCampaign || {};
     const privateNotes = campaign.privateNotes || [];
@@ -79,7 +65,7 @@ const Campaign = () => {
                   <h1 className="no-margin-bottom">{campaign?.campaignTitle}</h1>
                   {campaignCreatedOn ? (
                     <small className="campaign-created no-margin-top">
-                      Campaign created on: {campaignCreatedOn}
+                      Created On: {campaignCreatedOn}
                     </small>
                   ) : (
                     <small className="campaign-created no-margin-top">No Campaign Creation Date</small>
@@ -111,8 +97,12 @@ const Campaign = () => {
                     </div>
                   </div>
                   <div className="campaign-buttons">
-                    <button className="edit-button">Edit Campaign</button>
-                    <button className="delete-button" onClick={handleRemove}>Delete Campaign</button>
+                    <Link to={`/update-campaign/${campaignId}`} className="edit-button">
+                      Edit Campaign
+                    </Link>
+                    <button className="delete-button" onClick={handleRemove}>
+                      Delete Campaign
+                    </button>
                   </div>
                 </div>
               </div>

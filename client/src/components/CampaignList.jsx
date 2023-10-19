@@ -9,7 +9,7 @@ const CampaignList = ({ campaigns, title }) => {
         return (
           <div>
             <div className="">
-              <h1>{title}</h1>
+              <h2>{title}</h2>
             </div>
             <div className="row">
               {campaigns.map((campaign, index) => (
