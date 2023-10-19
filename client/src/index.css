@@ -650,3 +650,137 @@ footer {
 h1 {
   font-family: 'Young Serif', serif;
 }
+
+.display-img {
+  background-size: cover;
+  background-position: center;
+  width: 300px;
+  height: 300px;
+}
+
+/* Add styles for the right section with the campaign image */
+.campaign-image-container {
+  flex: 1; /* Expand to fill available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.campaign-image {
+  max-width: 100%; /* Adjust the image size */
+  max-height: 100%;
+  border-radius: 10px; /* Rounded border for the image */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow to the image */
+}
+
+/* Style for the left section with campaign details */
+.campaign-details {
+  flex: 1; /* Expand to fill available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  margin:auto;
+  text-align:center;
+}
+
+/* Style for the title, created on, and description */
+.campaign-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.campaign-created {
+  font-size: 16px;
+  color: #888;
+  text-align: center !important;
+  margin: auto;
+}
+
+.campaign-details .campaign-created {
+  text-align: center; /* Increase specificity with a more specific selector */
+}
+
+/* Style for the buttons at the bottom */
+.campaign-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.edit-button,
+.delete-button {
+  background-color: #333;
+  color: white;
+  border: 1px solid white;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+  font-family: 'Young Serif', serif;
+  width: 48%; /* Adjust button width */
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Add these styles to adjust the layout */
+.campaign-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.campaign-details-left {
+  flex: 1;
+  padding: 0 10px; /* Add padding to separate content from image */
+}
+
+.campaign-details-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.campaign-image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.campaign-image-container {
+  text-align: right; /* Align the image to the right */
+}
+
+.no-margin-bottom {
+  margin-bottom:0px;
+  padding-bottom:0px;
+}
+
+.no-margin-top {
+  margin-top:0px;
+  padding-top:0px;
+}
+
+/* fix the cards displaying weirdly if their description is long */
+.campaign-description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Adjust the number of lines (4 in this example) */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Adjust the max width as needed */
+}
+
+.campaign-card {
+  margin: 10px; /* Adjust the margin size as needed */
+}
