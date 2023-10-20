@@ -12,9 +12,14 @@ Campaign Creator is a place where you can let your imagination run wild! Here yo
 ## Application Preview
 Please enjoy these preview images of the application.
 
+![The landing page of the Campaign Planner Site.](./client/src/assets/images/CampaignPlannerLandingPage.png)
+
+![The dashboard of an example user displaying different cards with the campaign titles.](./client/src/assets/images/CampaignPlannerDashboard.png)
+
+![An example campaign page with some private notes.](./client/src/assets/images/CampaignPlannerCampaignPage.png)
 
 ## Getting Started
-To access our app simply visit our [webpage](). Note: you will need to create an account before creating a campaign! 
+To access our app simply visit our [webpage](https://secret-coast-66847-6953fb83e518.herokuapp.com/). Note: you will need to create an account before creating a campaign! 
 
 ## Technologies Used
 * HTML/CSS

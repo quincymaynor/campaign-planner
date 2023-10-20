@@ -46,6 +46,7 @@ const CampaignUpdate = () => {
   
   const [selectedImage, setSelectedImage] = useState(campaignImages[0]);
   const [campaignImage, setCampaignImage] = useState(selectedImage); // New state for campaignImage
+  
   const handleImageChange = (event) => {
     const selectedValue = event.target.value;
     setSelectedImage(selectedValue);
@@ -88,20 +89,6 @@ const CampaignUpdate = () => {
       console.error(err);
     }
   };
-  
-    // const handleUpdate = async (event) => {
-    //   event.preventDefault();
-    //   try {
-    //     const { data } = updateCampaign({
-    //       variables: {
-    //         campaignId: campaignId
-    //       },
-    //     });
-    
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -169,7 +156,7 @@ const CampaignUpdate = () => {
               </div>
           
               <button className="campaign-add-button" type="submit">
-                Edit Campaign
+                Save Campaign
               </button>
             </form>
           </div>
